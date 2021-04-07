@@ -4,6 +4,7 @@ import styles from "../styles/Toolbar.module.css"
 
 const ToolBar = () =>  {
   const [show, setShow] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     setTimeout(() => {

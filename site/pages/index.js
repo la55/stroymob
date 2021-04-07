@@ -1,23 +1,12 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Meta from '../components/Meta'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
+    <>
+        <Meta title='Главная' keywords="111" description="222" />
+        <h1>
           Сеть магазинов Строитель г.Омск
         </h1>
-      </main>
-
-      <footer className={styles.footer}>
-          Copiright, 2021
-      </footer>
-    </div>
+    </>
   )
 }

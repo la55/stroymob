@@ -1,0 +1,12 @@
+.main {
+    position: fixed;
+    width: 50vh;
+    z-index: 2;
+    top: 0;
+    left: 0;
+}
+
+.loading {
+    width: 30vh;
+    height: auto;
+}

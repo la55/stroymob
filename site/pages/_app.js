@@ -1,19 +1,14 @@
-import dynamic from 'next/dynamic'
+import Layout from '../components/Layout'
 import '../styles/globals.css'
 
 
-const DynamicToolbar = dynamic(
-  () => import('../components/Toolbar'),
-  { loading: () => <p>Loading ...</p>,
-    ssr: false }
-)
+
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
-      <Component {...pageProps} />
-      <DynamicToolbar />
-    </>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
   )
 }
 
