@@ -17,19 +17,19 @@ const ToolBar = () =>  {
   return (
             <div className={styles.main}>
                 <div onClick={() => { router.push('/') }}>
-                    <img src="svg/home.svg" width="32" height="32"/>
+                    <img src="/static/svg/home.svg" width="32" height="32"/>
                 </div>
                 <div>
-                    <img src="svg/cart.svg" width="32" height="32"/>
+                    <img src="/static/svg/cart.svg" width="32" height="32"/>
                 </div>
                 <div>
-                    <img src="svg/search.svg" width="32" height="32"/>
+                    <img src="/static/svg/search.svg" width="32" height="32"/>
                 </div>
                 <div>
-                    <img src="svg/filter2.svg" width="32" height="32"/>
+                    <img src="/static/svg/filter2.svg" width="32" height="32"/>
                 </div>
-                <div>
-                    <img src="svg/menu.svg" width="32" height="32"/>
+                <div onClick={() => { router.push('/catalog/') }}>
+                    <img src="/static/svg/menu.svg" width="32" height="32"/>
                 </div>
             </div>
         )

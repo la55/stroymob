@@ -3,6 +3,7 @@
 
 DB
 utils/media
+utils/.env
 assets
 
 # dependencies

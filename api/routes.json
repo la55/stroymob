@@ -1,14 +1,16 @@
 {
-  "/api/menu/:id": "/cats/:id/?_embed=cats", 
-  "/api/all_products_by_cat/:id": "/products/?catId=:id",
-  "/api/stock_products_by_cat/:id": "/products/?catId=:id&count_ne=0",
-  "/api/filters_by_cat/:id": "/cats/:id/?_embed=filters",
-  "/api/params_by_cat/:id": "/cats/:id/?_embed=params",
-  "/api/stocks_by_cat/:id": "/cats/:id/?_embed=stocks",
-  "/api/products/:id": "/products/:id",
-  "/api/product_with_stocks/:id": "/products/:id/?_embed=stocks",
-  "/api/product_with_params/:id": "/products/:id/?_embed=params",
-  "/api/product_with_stocks_and_params/:id": "/products/:id/?_embed=stocks&_embed=params",
-  "/api/all_products_no_price": "/products/?price=0&_page=1&_limit=1000",
-  "/api/stock_products_no_price": "/products/?price=0&count_gte=1&_embed=stocks"
+  "/api1/menu/:id": "/cats/:id/?_embed=cats", 
+  "/api1/cats/:id": "/cats/:id/?_embed=cats", 
+  "/api1/catalog": "/cats/?catId=top", 
+  "/api1/all_products_by_cat/:id": "/products/?catId=:id",
+  "/api1/stock_products_by_cat/:id": "/products/?catId=:id&count_ne=0",
+  "/api1/filters_by_cat/:id": "/cats/:id/?_embed=filters",
+  "/api1/params_by_cat/:id": "/cats/:id/?_embed=params",
+  "/api1/stocks_by_cat/:id": "/cats/:id/?_embed=stocks",
+  "/api1/products/:id": "/products/:id",
+  "/api1/product_with_stocks/:id": "/products/:id/?_embed=stocks",
+  "/api1/product_with_params/:id": "/products/:id/?_embed=params",
+  "/api1/product_with_stocks_and_params/:id": "/products/:id/?_embed=stocks&_embed=params",
+  "/api1/all_products_no_price": "/products/?price=0&_page=1&_limit=1000",
+  "/api1/stock_products_no_price": "/products/?price=0&count_gte=1&_embed=stocks"
 }
