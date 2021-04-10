@@ -1,4 +1,5 @@
 .next/
+.media/
 .dockerignore
 Dockerfile
 node_modules/

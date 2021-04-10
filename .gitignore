@@ -4,7 +4,7 @@
 DB/db.json
 utils/media
 utils/.env
-assets
+site/media
 
 # dependencies
 site/node_modules
