@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from '../../styles/CatList.module.css'
 
 const CatList = ({ cats }) => (
@@ -7,7 +8,12 @@ const CatList = ({ cats }) => (
             <Link key={ cat.id } href={`/catalog/${cat.id}`}>
                 <div className={styles.card}>
                     <div className={styles.image}>
-                        <img src={`/media/catphoto/${cat.id}.jpg`} width="30px" height="30px"/>
+                    <Image
+                        src={`https://stroitel55.com/media/catphoto/${cat.id}.jpg`}
+                        alt={ cat.title }
+                        width={50}
+                        height={50}
+                    />
                     </div>
                     <div className={styles.title}>
                         { cat.title }

@@ -30,13 +30,15 @@
 }
 
 .title {
-    flex: 8
+    flex: 7;
 }
 .arrow {
     flex: 1
 }
 .image {
-    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex: 2;
 }
 
