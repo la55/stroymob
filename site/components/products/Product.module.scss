@@ -1,0 +1,35 @@
+.card {
+    position: relative;
+    border: 1px solid var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 20rem;
+    margin: 0.1em;
+    padding: 0.1em;
+    cursor: pointer;
+
+    .image {
+        margin-right: 1em;
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            font-size: 0.8rem;
+            font-weight: 900;
+        }
+        .price {
+            border-bottom-left-radius: 30%;
+            color: white;
+            font-weight: 900;
+            font-size: 1.5rem;
+            padding: 0.2rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: green;
+        }
+    }
+}

@@ -1,18 +1,8 @@
 import { useRouter } from 'next/router'
-import {useState, useEffect} from 'react'
-import styles from "../styles/Toolbar.module.css"
+import styles from "./Toolbar.module.scss"
 
 const ToolBar = () =>  {
-  const [show, setShow] = useState(false)
   const router = useRouter()
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShow(true)
-    }, 5000)
-  }, [show])
-
-  if (!show) return null
 
   return (
             <div className={styles.main}>

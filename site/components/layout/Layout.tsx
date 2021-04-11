@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic'
-import Meta from '../components/Meta'
-import Nav from '../components/Nav'
-import Loading from '../components/Loading'
-import styles from '../styles/Layout.module.css'
+import Meta from '../meta/Meta'
+import Nav from '../nav/Nav'
+import Loading from '../loading/Loading'
+import styles from './Layout.module.scss'
 
 const Layout = ({children}) => {
     return (
@@ -20,7 +20,7 @@ const Layout = ({children}) => {
 }
 
 const DynamicToolbar = dynamic(
-    () => import('../components/Toolbar'),
+    () => import('../nav/Toolbar'),
     { loading: () => <Loading />,
       ssr: false }
   )
