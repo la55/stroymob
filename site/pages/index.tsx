@@ -1,4 +1,5 @@
 import Meta from '../components/meta/Meta'
+import styles from '../styles/Home.module.scss'
 
 export default function Home() {
   return (
@@ -7,6 +8,8 @@ export default function Home() {
         <h1>
           Сеть магазинов Строитель г.Омск
         </h1>
+        <div className={styles.cover}>
+        </div>
     </>
   )
 }

@@ -1,0 +1,8 @@
+.cover {
+    height: 80vh;
+    background-image: url('/static/svg/builder.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: 1px solid var(--primary-color);
+}
