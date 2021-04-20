@@ -19,7 +19,7 @@ const Product = ({ product }) => {
                 </div>
                 <div className={styles.info}>
                     <div className={styles.price}>
-                        {product.price}
+                        {product.price} руб.
                     </div>
                     <div className={styles.title}>
                         { product.title }

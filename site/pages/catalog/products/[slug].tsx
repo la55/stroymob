@@ -5,7 +5,7 @@ const ProductDetailPage = ({ product }) => {
     return (
         <>
             <Link href={`/catalog/${product.catId}`} >
-            &larr; назад 
+           <a> &larr; {product.cat.title}</a>
             </Link>
             <ProductDetail product={product} />
         </>

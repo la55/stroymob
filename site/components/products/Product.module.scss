@@ -21,15 +21,15 @@
             font-weight: 900;
         }
         .price {
+            background-color: lightyellow;
+            color: red;
             border-bottom-left-radius: 30%;
-            color: white;
             font-weight: 900;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             padding: 0.2rem;
             position: absolute;
             top: 0;
             right: 0;
-            background-color: green;
         }
     }
 }

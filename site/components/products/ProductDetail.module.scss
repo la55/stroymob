@@ -22,10 +22,26 @@
 
     .info {
         flex: 1;
+
+        .title {
+            margin: 0.5em ;
+            padding: 1em;
+            text-align: center;
+            font-weight: bold;
+        }
         .pay {
             margin: 0.5em 0;
             display: flex;
             justify-content: space-between;
+
+            .buy {
+                padding: 0.5em;
+                background-color: black;
+                color: white;
+                border-bottom-right-radius: 15%;
+                font-weight: 900;
+                cursor: pointer;
+            }
         }
 
         .code {

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styles from './ProductDetail.module.scss'
 import Params from './Params'
 import Stocks from './Stocks'
+import ProductList from './ProductList'
 
 const ProductDetail = ({ product }) => {
     const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.id}.jpg`)
@@ -16,12 +17,12 @@ const ProductDetail = ({ product }) => {
                 />
                 </div>
                 <div className={styles.info}>
+                    <div className={styles.title}>
+                        { product.title }
+                    </div>
                     <div className={styles.pay}>
                         <div className={styles.buy}>
-                            <input type="number" />
-                            <button>
                                 В корзину
-                            </button>
                         </div>
                         <div className={styles.price}>
                            {product.price} руб.
@@ -32,11 +33,8 @@ const ProductDetail = ({ product }) => {
                             Арт. { product.vendor_code }
                         </div>
                         <div>
-                            Штр. { product.barcode }
+                          Штр. { product.barcode }
                         </div>
-                    </div>
-                    <div className={styles.title}>
-                        { product.title }
                     </div>
                     <div className={styles.params}>
                         <Params params={ product.params }/>
