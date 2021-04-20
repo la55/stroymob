@@ -1,0 +1,19 @@
+.grid {
+    background-color: darkseagreen;
+    color: white;
+    padding: 0.5em;
+
+    .row {
+        display: flex;
+        border-bottom: 1px solid greenyellow;
+
+        .title {
+            flex: 4;
+        }
+        
+        .count {
+            flex: 1;
+            font-weight: 900;
+        }
+    }
+}

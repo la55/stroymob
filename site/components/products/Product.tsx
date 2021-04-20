@@ -7,7 +7,7 @@ const Product = ({ product }) => {
 
     return (
         <Link key={ product.id } href={`/catalog/products/${product.id}`}>
-            <div  onClick={(e) => { e.preventDefault(); alert('Купить? Корзина еще не готова!')} } className={styles.card}>
+            <div  className={styles.card}>
                 <div className={styles.image}>
                 <img
                     src={image}

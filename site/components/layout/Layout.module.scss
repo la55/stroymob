@@ -2,11 +2,15 @@
   min-height: 100vh;
   padding: 0 0.5rem;
   border: 1px solid var(--container-color);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .main {
   margin: 3rem 0;
   border: 1px solid var(--main-color);
+  max-width: 1400px;
 }
 
 .footer {

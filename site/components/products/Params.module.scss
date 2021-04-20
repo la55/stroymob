@@ -1,0 +1,19 @@
+.grid {
+    background-color:darkslategray;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.5em;
+    
+    .row {
+        display: flex;
+        border-bottom: 1px solid limegreen;
+
+        .name {
+            flex: 1;
+        }
+
+        .value{
+            flex: 2;
+        }
+    }
+}
