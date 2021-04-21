@@ -1,0 +1,51 @@
+.grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .search {
+        width: 100%;
+        max-width: 1200px;
+        padding: 0.5em;
+
+        input {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 900;
+            width: 100%;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid var(--main-color);
+        }
+        input:focus {
+            outline: none;
+        }
+    }
+
+    .results {
+        max-width: 1200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        @media (min-width: 600px) {
+            flex-direction: row;   
+        }
+
+        .products {
+            flex: 3;
+            .all {
+                padding: 0.3rem;
+                font-weight: 900;
+                text-align: center;
+                width: 100%;
+                background-color: black;
+                color: white;
+            }
+        }
+        .cats {
+            flex: 1;
+        }
+    }
+}

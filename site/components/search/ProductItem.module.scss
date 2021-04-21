@@ -1,0 +1,21 @@
+.card {
+    border-bottom: 1px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+
+    .image {
+        flex: 1;
+        margin-right: 0.3em;
+    }
+    .title {
+        flex: 8;
+        font-size: 0.8rem;
+    }
+    .price {
+        margin-left: 0.3em;
+        flex: 1;
+        color: red;
+    }
+}

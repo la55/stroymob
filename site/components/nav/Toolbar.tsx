@@ -12,7 +12,7 @@ const ToolBar = () =>  {
                 <div>
                     <img src="/static/svg/cart.svg" width="32" height="32"/>
                 </div>
-                <div>
+                <div onClick={() => { router.push('/search/') }}>
                     <img src="/static/svg/search.svg" width="32" height="32"/>
                 </div>
                 <div>
