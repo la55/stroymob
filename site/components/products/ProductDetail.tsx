@@ -33,7 +33,7 @@ const ProductDetail = ({ product }) => {
                             Арт. { product.vendor_code }
                         </div>
                         <div>
-                          Штр. { product.barcode }
+                          { product.barcode }
                         </div>
                     </div>
                     <div className={styles.params}>

@@ -9,9 +9,26 @@
         flex: 1;
         margin-right: 0.3em;
     }
-    .title {
+    .info {
         flex: 8;
-        font-size: 0.8rem;
+
+        .title {
+            font-size: 0.8rem;
+        }
+        .code {
+            display: flex;
+            align-items: flex-end;
+            font-size: 0.8rem;
+
+            .vendor {
+                flex: 1;
+                color: green;
+            }
+            .barcode {
+                flex: 1;
+                color:goldenrod;
+            }
+        }
     }
     .price {
         margin-left: 0.3em;

@@ -17,8 +17,18 @@ const ProductItem = ({ product }) => {
                     height={50}
                 />
                 </div>
-                <div className={styles.title}>
-                    { product.title }
+                <div className={styles.info}>
+                    <div className={styles.title}>
+                        { product.title }
+                    </div>
+                    <div className={styles.code}>
+                        <div className={styles.vendor}>
+                            Арт. { product.vendor_code }
+                        </div>
+                        <div className={styles.barcode}>
+                            { product.barcode }
+                        </div>
+                    </div>
                 </div>
                 <div className={styles.price}>
                     {product.price} руб.

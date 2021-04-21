@@ -14,13 +14,33 @@ const Search = () => {
             setCats([])
             return undefined 
         }
-        const searchAndSet = async (api_path, setFunc) => {
-            const res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/${api_path}/${term}`)
+        const searchCats = async () => {
+            if (Number.isInteger(parseInt(term[0]))) {
+                return false
+            }
+            const res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/cats_by_title/${term}`)
             const data = await res.json()
-            setFunc(data.slice(0,5))
+            setCats(data.slice(0,5))
         }
-        searchAndSet('api1/cats_by_title', setCats)
-        searchAndSet('api1/products_by_title', setProducts)
+        const searchProducts = async () => {
+            let data = []
+            let res
+            if (!Number.isInteger(parseInt(term[0]))) {
+                res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/products_by_title/${term}`)
+                data = await res.json()
+            }
+            if (data.length < 1) {
+                res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/products_by_vendor_code/${term}`)
+                data = await res.json()
+            }
+            if (data.length < 1 && Number.isInteger(parseInt(term))) {
+                res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/products_by_barcode/${term}`)
+                data = await res.json()
+            }
+            setProducts(data.slice(0,5))
+        }
+        searchCats()
+        searchProducts()
     }, [term])
 
     return (
