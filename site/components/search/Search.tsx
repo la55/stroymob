@@ -28,7 +28,6 @@ const Search = () => {
             <div className={styles.search}>
                 <input type="text"
                     name='search'
-                    autocomplete="off"
                     onChange={(e) => setTerm(e.target.value)}
                 placeholder="Поиск товара или категории"/>
             </div>
