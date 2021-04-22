@@ -18,8 +18,14 @@ const Search = () => {
             if (Number.isInteger(parseInt(term[0]))) {
                 return false
             }
-            const res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/cats_by_title/${term}`)
-            const data = await res.json()
+            let data = []
+            let res
+            res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/cats_by_title/${term}`)
+            data = await res.json()
+            if (data.length < 1) {
+                res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/cats_by_title_fulltext/${term}`)
+                data = await res.json()
+            }
             setCats(data.slice(0,5))
         }
         const searchProducts = async () => {
@@ -27,6 +33,10 @@ const Search = () => {
             let res
             if (!Number.isInteger(parseInt(term[0]))) {
                 res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/products_by_title/${term}`)
+                data = await res.json()
+            }
+            if (data.length < 1 && !Number.isInteger(parseInt(term[0]))) {
+                res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/products_by_title_fulltext/${term}`)
                 data = await res.json()
             }
             if (data.length < 1) {

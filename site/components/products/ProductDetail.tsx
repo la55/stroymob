@@ -40,7 +40,7 @@ const ProductDetail = ({ product }) => {
                         <Params params={ product.params }/>
                     </div>
                     <div className={styles.stocks}>
-                        <Stocks stocks={ product.stocks }/>
+                        <Stocks stocks={ product.stocks } unit={product.unit}/>
                     </div>
                 </div>
             </div>

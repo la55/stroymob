@@ -1,6 +1,6 @@
 import styles from './Stocks.module.scss'
 
-const Stocks = ({ stocks }) => {
+const Stocks = ({ stocks, unit }) => {
     return (
         <div className={styles.grid}>
             { stocks.map(stock => (
@@ -9,7 +9,7 @@ const Stocks = ({ stocks }) => {
                         { stock.title}
                     </div>
                     <div className={styles.count}>
-                        {stock.count_str}
+                        {stock.count_str} {unit}
                     </div>
                 </div>
             ))}
