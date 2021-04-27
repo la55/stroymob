@@ -1,11 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { CartContext } from '../../context/cart/cart.provider'
 import styles from './ProductDetail.module.scss'
 import Params from './Params'
 import Stocks from './Stocks'
 import ProductList from './ProductList'
 
 const ProductDetail = ({ product }) => {
+
     const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.id}.jpg`)
+
+    const { addItem } = useContext(CartContext)
+    //onClick={addItem({item: product.id, quantity: 1 })}
+    const addToCart = () => {
+        const item = { product, qty: 1}
+        addItem(item)
+    }
+
+
     return (
         <div>
               <div  className={styles.card}>
@@ -21,7 +32,7 @@ const ProductDetail = ({ product }) => {
                         { product.title }
                     </div>
                     <div className={styles.pay}>
-                        <div className={styles.buy}>
+                        <div className={styles.buy} onClick={addToCart}>
                                 В корзину
                         </div>
                         <div className={styles.price}>

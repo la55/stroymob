@@ -8,4 +8,16 @@
     justify-content: space-around;
     background-color: black;
     padding: 0.5rem 0;
+
+    .cart {
+        position: relative;
+
+        .count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-weight: 900;
+            color: white;
+        }
+    }
 }
