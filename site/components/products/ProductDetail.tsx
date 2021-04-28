@@ -10,11 +10,6 @@ const ProductDetail = ({ product }) => {
     const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.id}.jpg`)
 
     const { addItem } = useContext(CartContext)
-    //onClick={addItem({item: product.id, quantity: 1 })}
-    const addToCart = () => {
-        const item = { product, qty: 1}
-        addItem(item)
-    }
 
 
     return (
@@ -32,7 +27,7 @@ const ProductDetail = ({ product }) => {
                         { product.title }
                     </div>
                     <div className={styles.pay}>
-                        <div className={styles.buy} onClick={addToCart}>
+                        <div className={styles.buy} onClick={() => addItem({ product, qty: 1 })}>
                                 В корзину
                         </div>
                         <div className={styles.price}>

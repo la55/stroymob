@@ -12,7 +12,7 @@ const ToolBar = () =>  {
                 <div onClick={() => { router.push('/') }}>
                     <img src="/static/svg/home.svg" width="32" height="32"/>
                 </div>
-                <div className={styles.cart}>
+                <div className={styles.cart} onClick={() => { router.push('/cart/') }}>
                     <img src="/static/svg/cart.svg" width="32" height="32"/>
                     <span className={styles.count}>
                         { cartItemsCount }
