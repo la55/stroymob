@@ -1,11 +1,11 @@
 import Product from "../../components/products/Product"
 
-export const totalPrice = (cartItems) => {
+export const totalPrice = (cartItems) =>  {
     if (cartItems.length > 0) {
         const reducer = (price, item) => price + (parseFloat(item.product.price) * item.qty)
-        return cartItems.reduce(reducer, parseFloat(0)).toFixed(2)
+        return parseFloat(cartItems.reduce(reducer, 0))
     }
-    return parseFloat(0).toFixed(2)
+    return parseFloat("0")
 }
 
 export const addItemToCart = (cartItems, item) => {

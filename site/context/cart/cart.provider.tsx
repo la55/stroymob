@@ -8,7 +8,6 @@ export const CartContext = createContext({
     addItem: (item) => {},
     changeItemQty: (itemId, newQty) => {},
     removeItem: (itemId) => {},
-    clearItems: (itemId) => {}
 })
 
 
@@ -17,7 +16,7 @@ const CartProvider = ({ children }) => {
 
     const [cartItems, setCartItems] = useState([])
     const [cartItemsCount, setCartItemsCount] = useState(0)
-    const [cartTotalPrice, setCartTotalPrice] = useState(0)
+    const [cartTotalPrice, setCartTotalPrice] = useState(0.00)
 
     const addItem = item => setCartItems(addItemToCart(cartItems, item))
     const changeItemQty = (itemId, newQty) => setCartItems(changeQty(cartItems, itemId, newQty))

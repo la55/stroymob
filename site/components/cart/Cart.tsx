@@ -4,12 +4,13 @@ import CartItems from './ListItems'
 
 const Cart = () => {
     const { cartItems, cartItemsCount, cartTotalPrice } = useContext(CartContext)
+    const strTotalPrice = cartTotalPrice.toFixed(2)
 
     return (
         <>
             <CartItems items={cartItems} />
             <div>Всего наименований: { cartItemsCount } </div>
-            <div>Сумма: { cartTotalPrice } руб. </div>
+            <div>Сумма: { strTotalPrice } руб. </div>
         </>
     )
 }
