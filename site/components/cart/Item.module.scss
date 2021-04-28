@@ -1,0 +1,43 @@
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+
+    .image {
+        flex: 1;
+        img {
+            width: 7em;
+        }
+    }
+    .info  {
+        flex: 4;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .pay {
+            text-align: right;
+
+            .qty{
+
+                input {
+                    width: 5em;
+                    border: none;
+                    outline: none;
+                    text-align: center;
+                    font-weight: 900;
+                }
+            }
+            .price {
+                color: red;
+                font-weight: 900;
+            }
+        }
+
+        .title {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+    }
+} 
