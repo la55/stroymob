@@ -4,13 +4,15 @@ import styles from './Item.module.scss'
 
 const SingleItem = ({product, qty}) => {
     const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.id}.jpg`)
-    const { addItem, changeItemQty, removeItem } = useContext(CartContext)
+    const { addItem, changeItemQty, removeItem, clearItems } = useContext(CartContext)
 
     return (
             <div className={styles.grid}>
                 
                 <div className={styles.card}>
-                    <span className={styles.delete}>X</span>
+                    <span className={styles.delete}
+                        onClick={(e) => clearItems(product.id)}
+                    >X</span>
                     <div className={styles.image}>
                         <img
                             src={image}

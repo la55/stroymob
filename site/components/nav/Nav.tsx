@@ -5,13 +5,7 @@ const Nav = () => {
     return (
         <div className={styles.main}>
             <Link href="/">
-                Главная
-            </Link>
-            <Link href="/about/">
-                О нас
-            </Link>
-            <Link href="/catalog/">
-                Каталог
+                СтроительОмск
             </Link>
         </div>
     )

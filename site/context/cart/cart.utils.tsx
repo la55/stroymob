@@ -40,3 +40,7 @@ export const removeItemFromCart = (cartItems, itemId) => {
     }
     return cartItems.filter(cartItem => cartItem.product.id !== itemId)
 }
+
+export const clearItemsFromCart = (cartItems, itemId) => {
+    return cartItems.filter(cartItem => cartItem.product.id !== itemId)
+}

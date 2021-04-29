@@ -13,7 +13,6 @@
 
     .card  {
         display: flex;
-        flex: 5;
         align-items: center;
 
         .delete {
@@ -22,6 +21,7 @@
             right: 0;
             border: 1px solid black;
             padding: 0.1em;
+            cursor: pointer;
         }
 
         .image {
@@ -30,6 +30,7 @@
             margin-right: 0.5em;
             img {
                 width: 5em;
+                height: 5em;
             }
         }
 
@@ -61,13 +62,14 @@
     }
     .buy {
         margin: 0 0.3em;
-        flex: 1;
         display: flex;
         align-items: center;
         justify-content: space-between;
 
         @media (min-width: 600px) {
+            width: 8em;
             flex-direction: column;
+            margin-left: auto;
         }
 
         .price {
@@ -76,6 +78,9 @@
             font-size: 0.7rem;
         }
         .qty{
+            span {
+                cursor: pointer;
+            }
 
             input {
                 width: 5em;
