@@ -1,43 +1,94 @@
-.card {
+.grid {
+    position: relative;
+    border: 1px solid springgreen;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid gray;
+    flex-direction: column;
+    margin: 0.3em 0;
 
-    .image {
-        flex: 1;
-        img {
-            width: 7em;
-        }
-    }
-    .info  {
-        flex: 4;
-        display: flex;
-        flex-direction: column;
+    @media (min-width: 600px) {
+        flex-direction: row;
         justify-content: space-between;
+        padding: 1em;
+    }
 
-        .pay {
-            text-align: right;
+    .card  {
+        display: flex;
+        flex: 5;
+        align-items: center;
 
-            .qty{
+        .delete {
+            position: absolute;
+            top: 0;
+            right: 0;
+            border: 1px solid black;
+            padding: 0.1em;
+        }
 
-                input {
-                    width: 5em;
-                    border: none;
-                    outline: none;
-                    text-align: center;
-                    font-weight: 900;
+        .image {
+            border: 1px solid darkslategrey;
+            padding: 0.2em;
+            margin-right: 0.5em;
+            img {
+                width: 5em;
+            }
+        }
+
+        .info {
+            padding-right: 1em;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .title {
+                font-weight: 700;
+                color: gray;
+            }
+            .code {
+                display: flex;
+                justify-content: space-between;
+                color: gray;
+                font-size: 0.8rem;
+                font-weight: 800;
+                .vendor {
+                    color: darkorange;
+                }
+                .barcode {
+                    color:tan;
                 }
             }
-            .price {
-                color: red;
+        }
+
+    }
+    .buy {
+        margin: 0 0.3em;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (min-width: 600px) {
+            flex-direction: column;
+        }
+
+        .price {
+            color: red;
+            font-weight: 900;
+            font-size: 0.7rem;
+        }
+        .qty{
+
+            input {
+                width: 5em;
+                border: none;
+                outline: none;
+                text-align: center;
                 font-weight: 900;
             }
         }
-
-        .title {
+        .total_price {
+            color: red;
+            font-weight: 900;
             font-size: 0.9rem;
-            font-weight: 700;
         }
     }
 } 
