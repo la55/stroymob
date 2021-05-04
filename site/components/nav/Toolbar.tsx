@@ -12,7 +12,7 @@ const ToolBar = () =>  {
             <div className={styles.main}>
                 <div
                  style={{ borderBottom: router.pathname === '/' ? '1px solid white' : 'none' }}
-                 onClick={() => { router.pathname === '/' ? router.back() :  router.push('/') }}>
+                 onClick={() => { router.push('/') }}>
                     <img src="/static/svg/home.svg" width="32" height="32"/>
                 </div>
                 <div className={styles.cart} 
@@ -33,7 +33,7 @@ const ToolBar = () =>  {
                 </div>
                 <div
                  style={{ borderBottom: router.pathname === '/catalog' ? '1px solid white' : 'none' }}
-                 onClick={() => { router.pathname === '/catalog' ? router.back() :  router.push('/catalog/') }}>
+                 onClick={() => {  router.push('/catalog/') }}>
                     <img src="/static/svg/menu.svg" width="32" height="32"/>
                 </div>
             </div>
