@@ -1,32 +1,22 @@
-import fs from 'fs'
-import Client  from 'ftp'
-import unzipper from 'unzipper'
-import dotenv from 'dotenv'
-import { parseFunc } from './parser.js'
+import ftp from 'basic-ftp'
 
-dotenv.config()
+async function downloadZip(MEDIA_DIR, ZIP_FILE) {
+    const client = new ftp.Client()
+    client.ftp.verbose = false
+    try {
+        await client.access({
+            host: process.env.FTP_HOST,
+            user: process.env.FTP_USER,
+            password: process.env.FTP_PASS,
+            secure: false
+        })
+        //console.log(await client.list())
+        await client.downloadTo(MEDIA_DIR + ZIP_FILE, ZIP_FILE)
+    }
+    catch(err) {
+        console.log(err)
+    }
+    client.close()
+}
 
-const c = new Client()
-
-const FILENAME = './media/export.xml'
-
-c.on('ready', function() {
-    console.log('Connecting to FTP ... ')
-    c.get('Export.zip', function(err, stream) {
-    if (err) throw err
-    console.log('Done. File downloaded ')
-    stream.once('close', () => { c.end(); })
-    console.log('Unzip file ... ')
-    stream.pipe(unzipper.ParseOne())
-        .pipe(fs.createWriteStream(FILENAME))
-        .on('finish', () => {
-            console.log('Done. File unzipped . ')
-            parseFunc(fs.readFileSync(FILENAME)
-        )})
-  })
-})
-c.connect({
-    host: process.env.FTP_HOST,
-    user: process.env.FTP_USER,
-    password: process.env.FTP_PASS
-})
+export default downloadZip

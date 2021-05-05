@@ -5,15 +5,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/download.js",
+    "start": "node ./src/start.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "basic-ftp": "^4.6.6",
     "dotenv": "^8.2.0",
-    "ftp": "^0.3.10",
+    "mongoose": "^5.12.7",
     "unzipper": "^0.10.11",
     "xml2js": "^0.4.23"
   }

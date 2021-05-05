@@ -5,7 +5,7 @@ ftp2db/media
 ftp2db/node_modules
 
 
-DB/db.json
+DB
 utils/media
 utils/.env
 
