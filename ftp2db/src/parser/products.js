@@ -26,6 +26,8 @@ export const getProducts = (offers, cat_uids) => {
                  name: p.$ !== undefined ? p.$.name : '',
                  value: p._
              }))
+             const count_reducer = (total, shop) => total + parseInt(shop.count)
+             const count = stocks.reduce(count_reducer, 0)
         return (
             {
                 uid: p.$.id_1c,
@@ -38,6 +40,7 @@ export const getProducts = (offers, cat_uids) => {
                 description: p.description,
                 stocks: stocks,
                 params: params,
+                count: count
             }
         )
     })

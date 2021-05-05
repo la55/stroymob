@@ -1,3 +1,4 @@
+import fs from 'fs'
 import ftp from 'basic-ftp'
 
 async function downloadZip(MEDIA_DIR, ZIP_FILE) {
@@ -11,7 +12,7 @@ async function downloadZip(MEDIA_DIR, ZIP_FILE) {
             secure: false
         })
         //console.log(await client.list())
-        await client.downloadTo(MEDIA_DIR + ZIP_FILE, ZIP_FILE)
+        await client.downloadTo(fs.createWriteStream(MEDIA_DIR + ZIP_FILE), ZIP_FILE)
     }
     catch(err) {
         console.log(err)

@@ -11,6 +11,7 @@ const ProductSchema = new mongoose.Schema({
     description: {type: String},
     stocks: {type: Array},
     params: {type: Array},
+    count: {type: Number},
 })
 
 const Product = mongoose.model('Product', ProductSchema)
