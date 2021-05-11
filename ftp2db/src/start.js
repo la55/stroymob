@@ -14,7 +14,7 @@ dotenv.config()
 
 const main = async () => {
 
-    await mongoose.connect('mongodb://localhost/test', {
+    await mongoose.connect('mongodb://ftp2db:88888@localhost/catalog', {
             useNewUrlParser: true, 
             useCreateIndex: true,
             useUnifiedTopology: true
@@ -22,16 +22,16 @@ const main = async () => {
     const db = mongoose.connection
     console.log('Connected to MongoDB')
 
-    await downloadZip(MEDIA_DIR, ZIP_FILE)
-    console.log(`Downloaded ${ZIP_FILE}`)
-    await extractXML(MEDIA_DIR, ZIP_FILE, XML_FILE)
-    console.log(`Extracted ${XML_FILE}`)
+    //await downloadZip(MEDIA_DIR, ZIP_FILE)
+    //console.log(`Downloaded ${ZIP_FILE}`)
+    //await extractXML(MEDIA_DIR, ZIP_FILE, XML_FILE)
+    //console.log(`Extracted ${XML_FILE}`)
 
     const xml = fs.readFileSync(MEDIA_DIR + XML_FILE)
     //const xml = fs.readFileSync('./media/export_with_params.xml')
     const { cats, products } = await parseCatalog(xml)
-    //console.log(`Parsed Catalog`)
-    //await createCatalog({cats, products})
+    console.log(`Parsed Catalog`)
+    await createCatalog({cats, products})
 
     db.close()
 }
