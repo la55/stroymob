@@ -1,8 +1,4 @@
-export DB_USER=vik 
-export DB_PASS=777 
-export DB_NAME=stroy 
-
-if [ -z ${DB_USER} ] || [ -z ${DB_PASS} ] || [ -z ${DB_NAME} ]
+if [ -z ${DB_USER} ] || [ -z ${DB_PASS} ] || 
 then
     echo "Variables did not set"
 else
@@ -13,7 +9,6 @@ else
         -v db-catalog:/data/db \
         -e MONGO_INITDB_ROOT_USERNAME=${DB_USER} \
         -e MONGO_INITDB_ROOT_PASSWORD=${DB_PASS} \
-        -e MONGO_INITDB_DATABASE=${DB_NAME} \
         --rm -d mongo --auth
 }
 fi

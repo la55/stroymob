@@ -4,7 +4,9 @@ import Cat from '../models/cat'
 const catDetail = async (req: Request, res: Response) => {
     try {
         const cat = await Cat.findOne({uid: req.params.uid})
-        return res.json(cat)
+        const cats = await Cat.find({parent_uid: req.params.uid})
+        const cat_with_sub = { cat, cats }
+        return res.json(cat_with_sub)
     } catch (err) {
         console.log(err)
     }

@@ -6,10 +6,10 @@ const Stocks = ({ stocks, unit }) => {
             { stocks.map(stock => (
                 <div key={stock.id} className={styles.row}>
                     <div className={styles.title}>
-                        { stock.title}
+                        { stock.shop_name}
                     </div>
                     <div className={styles.count}>
-                        {stock.count_str} {unit}
+                        {stock.count} {unit}
                     </div>
                 </div>
             ))}

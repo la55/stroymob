@@ -4,7 +4,7 @@ import Product from '../models/product'
 
 const productsByCat = async (req: Request, res: Response) => {
     const cat_uid = req.params.cat_uid
-    const order = req.query.order || null
+    const order = req.query.order || 'price'
     const price_gt = req.query.price_gt || 0
     const price_lt = req.query.price_lt   
     const price = price_lt ?

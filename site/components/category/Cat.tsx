@@ -3,10 +3,10 @@ import Link from 'next/link'
 import styles from './Cat.module.scss'
 
 const Cat = ({ cat }) => {
-    const [image, setImage] = useState(`https://stroitel55.com/media/catphoto/${cat.id}.jpg`)
+    const [image, setImage] = useState(`https://stroitel55.com/media/catphoto/${cat.uid}.jpg`)
 
     return (
-        <Link key={ cat.id } href={`/catalog/${cat.id}`}>
+        <Link key={ cat.id } href={`/catalog/${cat.uid}`}>
             <div className={styles.card}>
                 <div className={styles.image}>
                 <img

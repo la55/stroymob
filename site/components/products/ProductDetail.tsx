@@ -7,7 +7,7 @@ import ProductList from './ProductList'
 
 const ProductDetail = ({ product }) => {
 
-    const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.id}.jpg`)
+    const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.uid}.jpg`)
 
     const { addItem } = useContext(CartContext)
 
