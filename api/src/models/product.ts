@@ -12,7 +12,15 @@ const ProductSchema = new mongoose.Schema({
     stocks: {type: Array},
     params: {type: Array},
     count: {type: Number},
-},{ timestamps: true })
+},{
+    toJSON: {
+        transform(doc, ret) {
+            delete ret._id
+            delete ret.__v
+            delete ret.description
+        }
+    }
+})
 
 const Product = mongoose.model('Product', ProductSchema)
 

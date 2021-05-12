@@ -3,7 +3,7 @@ import ftp from 'basic-ftp'
 
 async function downloadZip(MEDIA_DIR, ZIP_FILE) {
     const client = new ftp.Client()
-    client.ftp.verbose = false
+    client.ftp.verbose = true
     try {
         await client.access({
             host: process.env.FTP_HOST,
