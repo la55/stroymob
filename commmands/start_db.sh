@@ -1,4 +1,4 @@
-if [ -z ${DB_USER} ] || [ -z ${DB_PASS} ] || 
+if [ -z ${DB_USER} ] || [ -z ${DB_PASS} ]  
 then
     echo "Variables did not set"
 else
