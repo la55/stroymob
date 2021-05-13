@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import Cat from '../models/cat'
+import Cat from '../../models/cat'
 
 const catalog = async (req: Request, res: Response) => {
     try {

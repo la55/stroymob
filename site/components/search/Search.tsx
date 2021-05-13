@@ -14,16 +14,17 @@ const Search = () => {
             setCats([])
             return undefined 
         }
+        const host = process.env.NEXT_PUBLIC_DATA_API
         const searchCats = async () => {
             if (Number.isInteger(parseInt(term[0]))) {
                 return false
             }
             let data = []
             let res
-            res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/cats_by_title/${term}`)
+            res =  await fetch(`${host}/api1/cats/?title=${term}`)
             data = await res.json()
             if (data.length < 1) {
-                res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/cats_by_title_fulltext/${term}`)
+                res =  await fetch(`${host}/api1/cats/?title=${term}&full=1`)
                 data = await res.json()
             }
             setCats(data.slice(0,5))
@@ -32,19 +33,19 @@ const Search = () => {
             let data = []
             let res
             if (!Number.isInteger(parseInt(term[0]))) {
-                res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/products_by_title/${term}`)
+                res =  await fetch(`${host}/api1/products/?title=${term}`)
                 data = await res.json()
             }
             if (data.length < 1 && !Number.isInteger(parseInt(term[0]))) {
-                res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/products_by_title_fulltext/${term}`)
+                res =  await fetch(`${host}/api1/products/?title=${term}&full=1`)
                 data = await res.json()
             }
             if (data.length < 1) {
-                res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/products_by_vendor_code/${term}`)
+                res =  await fetch(`${host}/api1/products/?vendor_code=${term}&barcode=${term}`)
                 data = await res.json()
             }
-            if (data.length < 1 && Number.isInteger(parseInt(term))) {
-                res =  await fetch(`${process.env.NEXT_PUBLIC_DATA_API}/api1/products_by_barcode/${term}`)
+            if (data.length < 1) {
+                res =  await fetch(`${host}/api1/products/?count_gt=-1&title=${term}&full=1&vendor_code=${term}&barcode=${term}`)
                 data = await res.json()
             }
             setProducts(data.slice(0,5))

@@ -9,10 +9,10 @@ export const totalPrice = (cartItems) =>  {
 }
 
 export const addItemToCart = (cartItems, item) => {
-    const itemToChange = cartItems.find(cartItem => cartItem.product.id === item.product.id)
+    const itemToChange = cartItems.find(cartItem => cartItem.product.uid === item.product.uid)
     if (itemToChange) {
         return cartItems.map(cartItem => 
-            cartItem.product.id === itemToChange.product.id ?
+            cartItem.product.uid === itemToChange.product.uid ?
             { ...cartItem, qty: parseInt(cartItem.qty) + 1 } : cartItem
         )
     }
@@ -20,10 +20,10 @@ export const addItemToCart = (cartItems, item) => {
 }
 
 export const changeQty = (cartItems, itemId, newQty) => {
-    const itemToChange = cartItems.find(cartItem => cartItem.product.id === itemId)
+    const itemToChange = cartItems.find(cartItem => cartItem.product.uid === itemId)
     if (itemToChange) {
         return cartItems.map(cartItem => 
-            cartItem.product.id === itemToChange.product.id ?
+            cartItem.product.uid === itemToChange.product.uid ?
             { ...cartItem, qty: parseInt(newQty) } : cartItem
         )
     }
@@ -31,16 +31,16 @@ export const changeQty = (cartItems, itemId, newQty) => {
 }
 
 export const removeItemFromCart = (cartItems, itemId) => {
-    const itemToChange = cartItems.find(cartItem => cartItem.product.id === itemId)
+    const itemToChange = cartItems.find(cartItem => cartItem.product.uid === itemId)
     if (itemToChange.qty > 1) {
         return cartItems.map(cartItem => 
-            cartItem.product.id === itemToChange.product.id ?
+            cartItem.product.uid === itemToChange.product.uid ?
             { ...cartItem, qty: parseInt(cartItem.qty) - 1 } : cartItem
         )
     }
-    return cartItems.filter(cartItem => cartItem.product.id !== itemId)
+    return cartItems.filter(cartItem => cartItem.product.uid !== itemId)
 }
 
 export const clearItemsFromCart = (cartItems, itemId) => {
-    return cartItems.filter(cartItem => cartItem.product.id !== itemId)
+    return cartItems.filter(cartItem => cartItem.product.uid !== itemId)
 }

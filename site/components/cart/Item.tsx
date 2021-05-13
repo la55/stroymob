@@ -3,7 +3,7 @@ import { CartContext } from '../../context/cart/cart.provider'
 import styles from './Item.module.scss'
 
 const SingleItem = ({product, qty}) => {
-    const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.id}.jpg`)
+    const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.uid}.jpg`)
     const { addItem, changeItemQty, removeItem, clearItems } = useContext(CartContext)
 
     return (
@@ -11,7 +11,7 @@ const SingleItem = ({product, qty}) => {
                 
                 <div className={styles.card}>
                     <span className={styles.delete}
-                        onClick={(e) => clearItems(product.id)}
+                        onClick={(e) => clearItems(product.uid)}
                     >X</span>
                     <div className={styles.image}>
                         <img
@@ -39,9 +39,9 @@ const SingleItem = ({product, qty}) => {
                         { parseFloat(product.price).toFixed(2) } руб.
                     </div>
                     <div className={styles.qty}>
-                        <span onClick={() => removeItem(product.id)}>&larr;</span>
+                        <span onClick={() => removeItem(product.uid)}>&larr;</span>
                         <input type="text" value={ qty }
-                        onChange={(e) => changeItemQty(product.id, e.target.value)}/>
+                        onChange={(e) => changeItemQty(product.uid, e.target.value)}/>
                         <span onClick={() => addItem({ product, qty: 1 })}>&rarr;</span>
                     </div>
                     <div className={styles.total_price}>

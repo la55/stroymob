@@ -12,6 +12,9 @@
     .info {
         flex: 8;
 
+        .zero {
+            color: red;
+        }
         .title {
             font-size: 0.8rem;
         }

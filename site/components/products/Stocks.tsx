@@ -4,7 +4,7 @@ const Stocks = ({ stocks, unit }) => {
     return (
         <div className={styles.grid}>
             { stocks.map(stock => (
-                <div key={stock.id} className={styles.row}>
+                <div key={stock.shop_uid} className={styles.row}>
                     <div className={styles.title}>
                         { stock.shop_name}
                     </div>

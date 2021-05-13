@@ -3,10 +3,10 @@ import Link from 'next/link'
 import styles from './ProductItem.module.scss'
 
 const ProductItem = ({ product }) => {
-    const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.id}.jpg`)
+    const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.uid}.jpg`)
 
     return (
-        <Link key={ product.id } href={`/catalog/products/${product.id}`}>
+        <Link key={ product.id } href={`/catalog/products/${product.uid}`}>
             <div  className={styles.card}>
                 <div className={styles.image}>
                 <img
@@ -18,6 +18,11 @@ const ProductItem = ({ product }) => {
                 />
                 </div>
                 <div className={styles.info}>
+                { product.count === 0 &&
+                    <div className={styles.zero}>
+                        нет в наличии
+                    </div>
+                }
                     <div className={styles.title}>
                         { product.title }
                     </div>
