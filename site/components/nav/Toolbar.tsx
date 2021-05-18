@@ -10,7 +10,7 @@ const ToolBar = () =>  {
 
   return (
             <div className={styles.main}>
-                <div
+                <div className={styles.home}
                  style={{ borderBottom: router.pathname === '/' ? '1px solid white' : 'none' }}
                  onClick={() => { router.push('/') }}>
                     <img src="/static/svg/home.svg" width="32" height="32"/>
@@ -23,15 +23,16 @@ const ToolBar = () =>  {
                         { cartItemsCount }
                     </span>
                 </div>
-                <div 
+                <div className={styles.search}
                  style={{ borderBottom: router.pathname === '/search' ? '1px solid white' : 'none' }}
                  onClick={() => { router.pathname === '/search' ? router.back() :  router.push('/search/') }}>
                     <img src="/static/svg/search.svg" width="32" height="32"/>
                 </div>
-                <div onClick={() => { router.back() }}>
+                <div
+                    onClick={() => { router.back() }}>
                     <img src="/static/svg/filter2.svg" width="32" height="32"/>
                 </div>
-                <div
+                <div className={styles.search}
                  style={{ borderBottom: router.pathname === '/catalog' ? '1px solid white' : 'none' }}
                  onClick={() => {  router.push('/catalog/') }}>
                     <img src="/static/svg/menu.svg" width="32" height="32"/>

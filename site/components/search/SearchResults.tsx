@@ -12,7 +12,7 @@ const SearchResults = ({ term }) => {
             const host = process.env.NEXT_PUBLIC_DATA_API
             console.log(host)
             const res =  await fetch(
-                `${host}/api1/products/?page=${page}&on_page=2&title=${term}&vendor_code=${term}&barcode=${term}`
+                `${host}/api1/products/?page=${page}&on_page=20&title=${term}&vendor_code=${term}&barcode=${term}`
             )
             const { products, max_pages } = await res.json()
             setResults([...results, ...products])
@@ -30,14 +30,17 @@ const SearchResults = ({ term }) => {
     return (
         <div>
             <h1>По запросу "{term}"</h1>
-            { results.length > 0 ? 
+            { results.length > 0 ?
                 <>
-                    <ProductsList products={results} />
-                    <div onClick={nextPage}>
-                        БОЛЬШЕ РЕЗУЛЬТАТОВ
-                    </div>
-                </>
-                 :
+                    <InfiniteScroll
+                        dataLength={results.length}
+                        next={nextPage}
+                        hasMore={(maxPages > page)}
+                        loader={<h4>Loading...</h4>}
+                    >
+                        <ProductsList products={results} />
+                    </InfiniteScroll>
+                </> :
                 <h2>Ничего не найдено</h2>
             }
         </div>

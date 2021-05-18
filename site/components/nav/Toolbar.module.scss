@@ -9,6 +9,10 @@
     background-color: black;
     padding: 0.5rem 0;
 
+    .home, .cart, .search, .catalog {
+        cursor: pointer;
+    }
+
     .cart {
         position: relative;
 
