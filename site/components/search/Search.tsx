@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import styles from './Search.module.scss'
+import { fetchProducts } from './utils'
 import CatList from '../../components/category/CatList'
 import Products from './Products'
+import styles from './Search.module.scss'
 
 const Search = () => {
     const router = useRouter()
@@ -32,28 +33,8 @@ const Search = () => {
             setCats(data.slice(0,5))
         }
         const searchProducts = async () => {
-            let results = []
-            if (!Number.isInteger(parseInt(term[0]))) {
-                let res =  await fetch(`${host}/api1/products/?title=${term}`)
-                let { products } = await res.json()
-                results = products
-            }
-            if (results.length < 1 && !Number.isInteger(parseInt(term[0]))) {
-                let res =  await fetch(`${host}/api1/products/?title=${term}&full=1`)
-                let { products } = await res.json()
-                results = products
-            }
-            if (results.length < 1) {
-                let res =  await fetch(`${host}/api1/products/?vendor_code=${term}&barcode=${term}`)
-                let { products } = await res.json()
-                results = products
-            }
-            if (results.length < 1) {
-                let res =  await fetch(`${host}/api1/products/?count_gt=-1&title=${term}&full=1&vendor_code=${term}&barcode=${term}`)
-                let { products } = await res.json()
-                results = products
-            }
-            setProducts(results)
+            const { products } = await fetchProducts(host, term, 1, 10)
+            setProducts(products)
         }
         searchCats()
         searchProducts()
