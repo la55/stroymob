@@ -7,7 +7,7 @@ interface Data {
     products: any
 }
 
-export const fetchProducts = async (host, term, page, on_page) => {
+export const fetchProducts = async (host: string, term: string, page: number, on_page: number) => {
     let data: Data = { count: 0, page, on_page, max_pages: 1,  products: [] }
 
     if (!Number.isInteger(parseInt(term[0]))) {

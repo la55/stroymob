@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {fetchProducts} from '../search/utils'
 import ProductsList from '../products/ProductList'
+import styles from './SearchResults.module.scss'
 
 const SearchResults = ({ term }) => {
     const [results, setResults] = useState([])
@@ -31,7 +32,7 @@ const SearchResults = ({ term }) => {
                 dataLength={results.length}
                 next={nextPage}
                 hasMore={(maxPages > page)}
-                loader={<h4>Загружаем...</h4>}
+                loader={<div className={styles.more} onClick={nextPage}>ПОКАЗАТЬ ЕЩЕ ...</div>}
             >
                 <ProductsList products={results} />
             </InfiniteScroll>

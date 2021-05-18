@@ -2,6 +2,8 @@
 
 tasks.txt
 
+remote_commands
+
 api/.env
 api/build
 api/node_modules
