@@ -13,17 +13,23 @@ app.all('*', async (req, res) => {
 
 const start = async () => {
 
-    const conn_str = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}`
-    try {
-        await mongoose.connect(conn_str, {
-                useNewUrlParser: true,
-                useCreateIndex: true,
-                useUnifiedTopology: true
-        })
-        console.log('Connected to DB')
-    } catch(err) {
-        console.log(err)
+    const connectToDB = async () => {
+        const conn_str = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}`
+
+        const conn_options =  {
+            useNewUrlParser: true,
+            useCreateIndex: true,
+            useUnifiedTopology: true
+        }
+        try {
+            await mongoose.connect(conn_str, conn_options)
+            console.log('Connected to DB')
+        } catch(err) {
+            console.log('Error connect to DB. Trying again')
+            setTimeout(connectToDB, 5000)
+        }
     }
+    connectToDB()
 
     app.listen(PORT, () => {
         console.log(`API started on ${PORT}`)

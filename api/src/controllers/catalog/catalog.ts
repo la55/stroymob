@@ -3,7 +3,7 @@ import Cat from '../../models/cat'
 
 const catalog = async (req: Request, res: Response) => {
     try {
-        const cats = await Cat.find({parent_uid: 'top'})
+        const cats = await Cat.find({parent_uid: 'top'}).sort('title')
         return res.json(cats)
     } catch (err) {
         console.log(err)
