@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 
 const DynamicSearch = dynamic(
-    () => import('../components/search/Search'),
+    () => import('../../components/search/Search'),
     { ssr: false }
 )
 

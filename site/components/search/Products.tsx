@@ -5,7 +5,7 @@ const Products = ({products}) => {
     return (
         <div className={styles.grid}>
             { products.map(product => (
-                <ProductItem key={product.id} product={product} />
+                <ProductItem key={product.uid} product={product} />
             ))}
         </div>
     )

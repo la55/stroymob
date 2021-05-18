@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import styles from './Search.module.scss'
 import CatList from '../../components/category/CatList'
 import Products from './Products'
 
 const Search = () => {
+    const router = useRouter()
     const [term, setTerm] = useState('')
     const [products, setProducts] = useState([])
     const [cats, setCats] = useState([])
@@ -30,25 +32,28 @@ const Search = () => {
             setCats(data.slice(0,5))
         }
         const searchProducts = async () => {
-            let data = []
-            let res
+            let results = []
             if (!Number.isInteger(parseInt(term[0]))) {
-                res =  await fetch(`${host}/api1/products/?title=${term}`)
-                data = await res.json()
+                let res =  await fetch(`${host}/api1/products/?title=${term}`)
+                let { products } = await res.json()
+                results = products
             }
-            if (data.length < 1 && !Number.isInteger(parseInt(term[0]))) {
-                res =  await fetch(`${host}/api1/products/?title=${term}&full=1`)
-                data = await res.json()
+            if (results.length < 1 && !Number.isInteger(parseInt(term[0]))) {
+                let res =  await fetch(`${host}/api1/products/?title=${term}&full=1`)
+                let { products } = await res.json()
+                results = products
             }
-            if (data.length < 1) {
-                res =  await fetch(`${host}/api1/products/?vendor_code=${term}&barcode=${term}`)
-                data = await res.json()
+            if (results.length < 1) {
+                let res =  await fetch(`${host}/api1/products/?vendor_code=${term}&barcode=${term}`)
+                let { products } = await res.json()
+                results = products
             }
-            if (data.length < 1) {
-                res =  await fetch(`${host}/api1/products/?count_gt=-1&title=${term}&full=1&vendor_code=${term}&barcode=${term}`)
-                data = await res.json()
+            if (results.length < 1) {
+                let res =  await fetch(`${host}/api1/products/?count_gt=-1&title=${term}&full=1&vendor_code=${term}&barcode=${term}`)
+                let { products } = await res.json()
+                results = products
             }
-            setProducts(data.slice(0,5))
+            setProducts(results)
         }
         searchCats()
         searchProducts()
@@ -68,7 +73,9 @@ const Search = () => {
                 </div> : null } 
                 {  products.length > 0 ? <div className={styles.products}>
                     <Products products={products} />
-                    <div className={styles.all}>ВСЕ РЕЗУЛЬТАТЫ</div>
+                    <div className={styles.all} onClick={() => router.push(`/search/${term}`)}>
+                        ВСЕ РЕЗУЛЬТАТЫ
+                    </div>
                 </div> : null } 
             </div>
         </div>
