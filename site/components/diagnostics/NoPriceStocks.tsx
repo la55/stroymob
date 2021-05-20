@@ -4,7 +4,7 @@ import ProductsList from '../products/ProductList'
 
 const ON_PAGE = 30
 
-const SearchResults = ({ term }) => {
+const SearchResults = () => {
     const [results, setResults] = useState([])
     const [page, setPage] = useState(1)
     const [maxPages, setMaxPages] = useState(1)
@@ -29,7 +29,7 @@ const SearchResults = ({ term }) => {
 
     return (
         <div>
-            <h1>По запросу "{term}"</h1>
+            <h1>В наличии на складе. Без цены !</h1>
             <InfiniteScroll
                 dataLength={results.length}
                 next={nextPage}
