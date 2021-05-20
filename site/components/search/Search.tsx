@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { fetchProducts } from './utils'
+import { fetchProducts, fetchCats } from './utils'
 import CatList from '../../components/category/CatList'
 import Products from './Products'
 import styles from './Search.module.scss'
+
+const MAX_CATS = 5
+const MAX_PRODUCTS = 10
 
 const Search = () => {
     const router = useRouter()
@@ -19,21 +22,11 @@ const Search = () => {
         }
         const host = process.env.NEXT_PUBLIC_DATA_API
         const searchCats = async () => {
-            if (Number.isInteger(parseInt(term[0]))) {
-                return false
-            }
-            let data = []
-            let res
-            res =  await fetch(`${host}/api1/cats/?title=${term}`)
-            data = await res.json()
-            if (data.length < 1) {
-                res =  await fetch(`${host}/api1/cats/?title=${term}&full=1`)
-                data = await res.json()
-            }
-            setCats(data.slice(0,5))
+            const cats = await fetchCats(host, term, MAX_CATS)
+            setCats(cats.slice(0,5))
         }
         const searchProducts = async () => {
-            const { products } = await fetchProducts(host, term, 1, 10)
+            const { products } = await fetchProducts(host, term, 1, MAX_PRODUCTS)
             setProducts(products)
         }
         searchCats()
@@ -46,16 +39,19 @@ const Search = () => {
                 <input type="text"
                     name='search'
                     onChange={(e) => setTerm(e.target.value)}
-                placeholder="Поиск товара или категории"/>
+                placeholder="Товар / артикул / категория"/>
             </div>
             <div className={styles.results}>
                 {  cats.length > 0 ? <div className={styles.cats}>
                     <CatList cats={cats} />
+                    <div className={styles.all} onClick={() => router.push(`/search/cats/${term}`)}>
+                        ВСЕ КАТЕГОРИИ
+                    </div>
                 </div> : null } 
                 {  products.length > 0 ? <div className={styles.products}>
                     <Products products={products} />
                     <div className={styles.all} onClick={() => router.push(`/search/${term}`)}>
-                        ВСЕ РЕЗУЛЬТАТЫ
+                        ВСЕ ТОВАРЫ
                     </div>
                 </div> : null } 
             </div>

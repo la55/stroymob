@@ -35,7 +35,13 @@
 
         .products {
             flex: 3;
-            .all {
+        }
+        .cats {
+            flex: 1;
+        }
+
+       .cats, .products {
+             .all {
                 padding: 0.3rem;
                 font-weight: 900;
                 text-align: center;
@@ -44,9 +50,7 @@
                 color: white;
                 cursor: pointer;
             }
-        }
-        .cats {
-            flex: 1;
+
         }
     }
 }
