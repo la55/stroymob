@@ -6,8 +6,8 @@ const ITEMS_ON_PAGE = 10
 const searchProducts = async (req: Request, res: Response) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    if (!req.query.cat_uid && !req.query.title && !req.query.vendor_code && !req.query.barcode ) {
-        return res.status(400).json('Missing query params, cat_uid or title or vendor/bar_code')
+    if (!req.query.price_lt && !req.query.cat_uid && !req.query.title && !req.query.vendor_code && !req.query.barcode ) {
+        return res.status(400).json('Missing query params, price or cat_uid or title or vendor/bar_code')
     }
 
     const sort_str = req.query.sort || 'price'
@@ -15,7 +15,6 @@ const searchProducts = async (req: Request, res: Response) => {
     const page = Number(req.query.page) || 1
     const on_page = Number(req.query.on_page) || ITEMS_ON_PAGE
     const skip = (page - 1) * on_page
-    console.log('Page:', page, 'on:', on_page, 'Skip:', skip)
 
     let or_obj = []
     let and_obj = {}
@@ -30,7 +29,7 @@ const searchProducts = async (req: Request, res: Response) => {
     and_obj = { ...and_obj, price }
     
     if (req.query.cat_uid) {
-        const cat_uid = req.params.cat_uid
+        const cat_uid = req.query.cat_uid
         and_obj = { ...and_obj, cat_uid }
     }
 
@@ -47,12 +46,12 @@ const searchProducts = async (req: Request, res: Response) => {
         const barcode = new RegExp('^' + req.query.barcode.toString(), 'i') 
         or_obj.push({ barcode: barcode })
     }
-    and_obj = { ...and_obj, $or: or_obj }
+    const q_obj = or_obj.length === 0 ? { ...and_obj } : { ...and_obj, $or: or_obj }
     
     try {
-        const products = await Product.find(and_obj)
+        const products = await Product.find(q_obj)
             .sort({ [String(sort_str)]: 1, _id: 1 }).limit(on_page).skip(skip)
-        const products_count = await Product.countDocuments(and_obj)
+        const products_count = await Product.countDocuments(q_obj)
         const max_pages = Math.ceil(products_count / on_page)
         return res.json({ count: products_count, page, max_pages, on_page, products })
     } catch (err) {

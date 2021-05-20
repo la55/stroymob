@@ -2,7 +2,6 @@ import Router from 'express'
 import catalog from './controllers/catalog/catalog'
 import catDetail from './controllers/catalog/cat_detail'
 import productDetail from './controllers/catalog/product_detail'
-import productsByCat from './controllers/catalog/products_by_cat'
 import searchCats from './controllers/search/search_cats'
 import searchProducts from './controllers/search/search_products'
 import home from './controllers/home'
@@ -11,7 +10,6 @@ const router = Router()
 
 router.route('/api1/catalog').get(catalog)
 router.route('/api1/cats/:uid').get(catDetail)
-router.route('/api1/catalog/:cat_uid').get(productsByCat)
 router.route('/api1/products/:uid').get(productDetail)
 
 router.route('/api1/cats').get(searchCats)
