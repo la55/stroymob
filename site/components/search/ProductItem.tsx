@@ -6,7 +6,7 @@ const ProductItem = ({ product }) => {
     const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.uid}.jpg`)
 
     return (
-        <Link key={ product.id } href={`/catalog/products/${product.uid}`}>
+        <Link key={ product.id } href={`/catalog/product/${product.uid}`}>
             <div  className={styles.card}>
                 <div className={styles.image}>
                 <img
