@@ -1,15 +1,16 @@
 import { useState, useContext } from 'react'
 import { CartContext } from '../../context/cart/cart.provider'
+import { useRouter } from 'next/router'
 import styles from './Item.module.scss'
 
 const SingleItem = ({product, qty}) => {
+    const router = useRouter()
     const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.uid}.jpg`)
     const { addItem, changeItemQty, removeItem, clearItems } = useContext(CartContext)
 
     return (
             <div className={styles.grid}>
-                
-                <div className={styles.card}>
+                <div className={styles.card} onClick={() => router.push(`/catalog/product/${product.uid}`)}>
                     <span className={styles.delete}
                         onClick={(e) => clearItems(product.uid)}
                     >X</span>

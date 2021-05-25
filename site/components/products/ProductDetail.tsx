@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
 import { CartContext } from '../../context/cart/cart.provider'
 import styles from './ProductDetail.module.scss'
 import Params from './Params'
@@ -7,10 +8,20 @@ import ProductList from './ProductList'
 
 const ProductDetail = ({ product }) => {
 
+    const router = useRouter()
     const [image, setImage] = useState(`https://stroitel55.com/media/productphoto/${product.uid}.jpg`)
+    const [itemInCart, setItemInCart] = useState(false)
+    const { addItem, cartItems } = useContext(CartContext)
 
-    const { addItem } = useContext(CartContext)
 
+    useEffect(() => {
+        const found = cartItems.find(cartItem => cartItem.product.uid === product.uid)
+        if (found) {
+            setItemInCart(true)
+        } else {
+            setItemInCart(false)
+        }
+    },[cartItems])
 
     return (
         <div>
@@ -27,9 +38,15 @@ const ProductDetail = ({ product }) => {
                         { product.title }
                     </div>
                     <div className={styles.pay}>
-                        <div className={styles.buy} onClick={() => addItem({ product, qty: 1 })}>
-                                В корзину
-                        </div>
+                        { itemInCart ?
+                            <div className={styles.in_cart}  onClick={() => router.push('/cart')}>
+                                В корзине
+                            </div>
+                            :
+                            <div className={styles.buy} onClick={() => addItem({ product, qty: 1 })}>
+                                    В корзину
+                            </div>
+                        }
                         <div className={styles.price}>
                            {product.price} руб.
                         </div>

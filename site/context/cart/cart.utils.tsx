@@ -20,6 +20,9 @@ export const addItemToCart = (cartItems, item) => {
 }
 
 export const changeQty = (cartItems, itemId, newQty) => {
+    if (!Number.isInteger(parseInt(newQty)) || parseInt(newQty) < 1) {
+        return [...cartItems]
+    }
     const itemToChange = cartItems.find(cartItem => cartItem.product.uid === itemId)
     if (itemToChange) {
         return cartItems.map(cartItem => 
