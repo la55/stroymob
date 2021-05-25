@@ -31,7 +31,7 @@ export const getProducts = (offers, cat_uids) => {
         return (
             {
                 uid: p.$.id_1c,
-                cat_uid: cat_uids[p.categoryId],
+                cat_uid: cat_uids[p.categoryId].$.id_1c,
                 title: p.name,
                 vendor_code: p.vendorCode,
                 barcode: p.barcode,

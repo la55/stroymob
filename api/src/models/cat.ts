@@ -4,6 +4,7 @@ const CatSchema = new mongoose.Schema({
     uid: { type: String },
     parent_uid: { type: String },
     title: { type: String },
+    breadcrumbs: { type: Array },
 },{
     toJSON: {
         transform(doc, ret) {

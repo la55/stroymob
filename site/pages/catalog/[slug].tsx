@@ -1,15 +1,19 @@
 import Link from 'next/link'
 import CatList from '../../components/category/CatList'
 import ProductList from '../../components/products/ProductList'
+import CatPath from '../../components/breadcrumbs/cat'
 
 const ON_PAGE = 1000
 
 const Cat = ({ cat, cats, products }) => {
     return (
         <>
-            <Link href={`/catalog/${cat.parent_uid !== 'top' ? cat.parent_uid : ''}`} >
-               &larr; назад 
-            </Link>
+            { cat.breadcrumbs.length > 0 ?
+                <CatPath breadcrumbs={cat.breadcrumbs} /> :
+                <Link href={'/catalog/'} >
+                    <a> &larr; Каталог</a>
+                 </Link>
+            }
             <h1>
                 { cat.title}
             </h1>
