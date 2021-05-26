@@ -13,6 +13,10 @@ const Cat = ({ cat, cats, prod_data }) => {
     const [maxPages, setMaxPages] = useState(1)
 
     useEffect(() => {
+        setPage(1)
+    },[])
+
+    useEffect(() => {
         if (cats.length > 0) {
             setResults([])
             return undefined
