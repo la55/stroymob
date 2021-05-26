@@ -12,7 +12,7 @@ const SearchResults = () => {
     useEffect(() => {
         const searchProducts = async () => {
             const host = process.env.NEXT_PUBLIC_DATA_API
-            let res =  await fetch(`${host}/api1/products/?page=${page}&on_page=${ON_PAGE}&price_gt=-1&price_lt=0.0001`)
+            let res =  await fetch(`${host}/api1/products/?page=${page}&on_page=${ON_PAGE}&in_stock=true&price_gt=-1&price_lt=0.0001`)
             const data = await res.json()
             const { products, max_pages } = data
             setResults([...results, ...products])
