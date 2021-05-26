@@ -21,6 +21,9 @@ const Product = ({ product }) => {
                     <div className={styles.price}>
                         {product.price} руб.
                     </div>
+                    <div className={styles.in_stock}>
+                        { product.in_stock ? <span className={styles.true}>В наличии</span> : <span className={styles.false}>Под заказ</span>}
+                    </div>
                     <div className={styles.title}>
                         { product.title }
                     </div>

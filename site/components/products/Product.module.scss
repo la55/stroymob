@@ -20,6 +20,23 @@
             font-size: 0.8rem;
             font-weight: 900;
         }
+        .in_stock {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+
+            .true, .false {
+                padding: 0.1em;
+                font-size: 0.7em;
+            }
+            .true {
+                background-color: green;
+                color: white
+            }
+            .false {
+                background-color: yellow;
+            }
+        }
         .price {
             background-color: lightyellow;
             color: red;

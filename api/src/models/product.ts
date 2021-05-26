@@ -12,6 +12,7 @@ const ProductSchema = new mongoose.Schema({
     stocks: {type: Array},
     params: {type: Array},
     count: {type: Number},
+    in_stock: {type: Boolean},
 },{
     toJSON: {
         transform(doc, ret) {

@@ -2,14 +2,38 @@
     color: gray;
     display: flex;
 
-
-    @media (max-width: 500px) {
-        flex-direction: column;
-    }
-
     .link {
         padding: 0.1em;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        .arrow {
+            margin: 0 0.2em;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .link {
+            width: 5em;
+            .title {
+                font-size: 0.8rem;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .title:after {
+                content: '...';
+            }
+        }
+        .link:last-child {
+            width: 100%;
+
+            .title:after {
+                content: none;
+            }
+        }
     }
         
 

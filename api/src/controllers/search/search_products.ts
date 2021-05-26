@@ -17,20 +17,39 @@ const searchProducts = async (req: Request, res: Response) => {
     const skip = (page - 1) * on_page
 
     let or_obj = []
-    let and_obj = {}
+    let and_obj = []
 
-    const count_gt = req.query.count_gt || 0
-    and_obj = { ...and_obj, count: { $gt: count_gt} }
+    //Filters test
+    const test_filter1 = { $or: [
+        {params: {name: 'Марка', value: 'Hobbi'}},
+        {params: {name: 'Марка', value: 'GROSS'}}
+    ] }
+    const test_filter2 = { $or: [
+        {params: {name: 'Длина (м)', value: '5'}},
+        {params: {name: 'Длина (м)', value: '3'}}
+   ] }
+    if (req.query.filters) {
+        and_obj.push(test_filter1)
+        and_obj.push(test_filter2)
+    }
 
-    const price_gt = req.query.price_gt || 0
+    //const count_gt = req.query.count_gt || 0
+    //and_obj = { ...and_obj, count: { $gt: count_gt} }
+
+    const price_gt = req.query.price_gt || -1 
     const price_lt = req.query.price_lt   
-    const price = price_lt ?
-         { $gt: price_gt, $lt: price_lt } : { $gt: price_gt }
-    and_obj = { ...and_obj, price }
+    const price = { price: price_lt ?
+         { $gt: price_gt, $lt: price_lt } : { $gt: price_gt } }
+    and_obj.push(price) 
     
+    if (req.query.in_stock) {
+        const in_stock = { in_stock: req.query.in_stock }
+        and_obj.push(in_stock) 
+    }
+
     if (req.query.cat_uid) {
-        const cat_uid = req.query.cat_uid
-        and_obj = { ...and_obj, cat_uid }
+        const cat_uid = { cat_uid: req.query.cat_uid }
+        and_obj.push(cat_uid)
     }
 
     if (req.query.title) {
@@ -46,14 +65,18 @@ const searchProducts = async (req: Request, res: Response) => {
         const barcode = new RegExp('^' + req.query.barcode.toString(), 'i') 
         or_obj.push({ barcode: barcode })
     }
-    const q_obj = or_obj.length === 0 ? { ...and_obj } : { ...and_obj, $or: or_obj }
+    if  (or_obj.length > 0) {
+        and_obj.push({ $or: or_obj})
+    }
+    const q_obj = { $and: and_obj }
     
     try {
         const products = await Product.find(q_obj)
-            .sort({ [String(sort_str)]: 1, _id: 1 }).limit(on_page).skip(skip)
+            .sort({ in_stock: -1, [String(sort_str)]: 1, _id: 1 }).limit(on_page).skip(skip)
         const products_count = await Product.countDocuments(q_obj)
         const max_pages = Math.ceil(products_count / on_page)
         return res.json({ count: products_count, page, max_pages, on_page, products })
+        //return res.json(q_obj)
     } catch (err) {
         console.log(err)
     }

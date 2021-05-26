@@ -40,7 +40,8 @@ export const getProducts = (offers, cat_uids) => {
                 description: p.description,
                 stocks: stocks,
                 params: params,
-                count: count
+                count: count,
+                in_stock: count > 0 ? true : false,
             }
         )
     })
