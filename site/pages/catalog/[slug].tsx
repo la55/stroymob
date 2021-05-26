@@ -9,36 +9,29 @@ const ON_PAGE = 30
 
 const Cat = ({ cat, cats, prod_data }) => {
     const [results, setResults] = useState([])
-    const [page, setPage] = useState(1)
+    const [pageNum, setPageNum] = useState(1)
     const [maxPages, setMaxPages] = useState(1)
 
-    useEffect(() => {
-        setPage(1)
-    },[])
 
     useEffect(() => {
         if (cats.length > 0) {
             setResults([])
+            setPageNum(1)
             return undefined
         }
         const searchProducts = async () => {
             const host = process.env.NEXT_PUBLIC_DATA_API
-            const res = await fetch(`${host}/api1/products/?page=${page}&on_page=${ON_PAGE}&cat_uid=${cat.uid}`)
+            const res = await fetch(`${host}/api1/products/?page=${pageNum}&on_page=${ON_PAGE}&cat_uid=${cat.uid}`)
             const { products, max_pages } = await res.json()
             setResults([...results, ...products])
             setMaxPages(max_pages)
         }
-        if (typeof window !== undefined) {
-            searchProducts()
-        } else {
-            //setResults(prod_data.products)
-            // add Pager ???
-        }
-    }, [page, cats])
+        searchProducts()
+    }, [pageNum, cats])
 
     const nextPage = () => {
-        if (page < maxPages) {
-            setPage(page + 1)
+        if (pageNum < maxPages) {
+            setPageNum(pageNum + 1)
         }
     }
     return (
@@ -56,7 +49,7 @@ const Cat = ({ cat, cats, prod_data }) => {
             <InfiniteScroll
                 dataLength={results.length}
                 next={nextPage}
-                hasMore={(maxPages > page)}
+                hasMore={(maxPages > pageNum)}
                 loader={<div onClick={nextPage}>ПОКАЗАТЬ ЕЩЕ ...</div>}
             >
                 <ProductList products={results} />
