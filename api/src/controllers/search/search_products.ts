@@ -4,11 +4,7 @@ import Product from '../../models/product'
 const ITEMS_ON_PAGE = 10
 
 const searchProducts = async (req: Request, res: Response) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-
-    if (req.method == 'POST') {
-        console.log('post')
-    }
+    res.setHeader('Access-Control-Allow-Origin', '*')
 
     if (!req.query.price_lt && !req.query.cat_uid && !req.query.title && !req.query.vendor_code && !req.query.barcode ) {
         return res.status(400).json('Missing query params, price or cat_uid or title or vendor/bar_code')
@@ -23,20 +19,24 @@ const searchProducts = async (req: Request, res: Response) => {
     let or_obj = []
     let and_obj = []
 
+
+    console.log(req.method)
+    console.log(req.body)
+
     if (req.method == 'POST') {
 
-        console.log(req.body)
+        if (req.body.filters.length > 0) {
 
-        //Filters test
-        req.body.filters.map((f: any) => {
-            and_obj.push({ $or: f.value.map((v: any) => (
-                    {
-                        params: {name: f.name, value: v }
-                    }
-                ))
+            req.body.filters.map((f: any) => {
+                and_obj.push({ $or: f.value.map((v: any) => (
+                        {
+                            params: {name: f.name, value: v }
+                        }
+                    ))
+                })
             })
-        })
 
+        }
     }
 
 

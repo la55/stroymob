@@ -11,6 +11,7 @@ const Cat = ({ cat, cats, prod_data }) => {
     const [results, setResults] = useState([])
     const [pageNum, setPageNum] = useState(1)
     const [maxPages, setMaxPages] = useState(1)
+    const [filters, setFilters] = useState([])
 
 
     useEffect(() => {
@@ -21,13 +22,20 @@ const Cat = ({ cat, cats, prod_data }) => {
         }
         const searchProducts = async () => {
             const host = process.env.NEXT_PUBLIC_DATA_API
-            const res = await fetch(`${host}/api1/products/?page=${pageNum}&on_page=${ON_PAGE}&cat_uid=${cat.uid}`)
+            const url = `${host}/api1/products?page=${pageNum}&on_page=${ON_PAGE}&cat_uid=${cat.uid}`
+            const res = await fetch(url, {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({filters: filters}),
+            })
             const { products, max_pages } = await res.json()
             setResults([...results, ...products])
             setMaxPages(max_pages)
         }
         searchProducts()
-    }, [pageNum, cats])
+    }, [pageNum, cats, filters])
 
     const nextPage = () => {
         if (pageNum < maxPages) {
