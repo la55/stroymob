@@ -14,6 +14,7 @@ router.route('/api1/products/:uid').get(productDetail)
 
 router.route('/api1/cats').get(searchCats)
 router.route('/api1/products').get(searchProducts)
+router.route('/api1/products').post(searchProducts)
 
 router.route('/api1').get(home)
 

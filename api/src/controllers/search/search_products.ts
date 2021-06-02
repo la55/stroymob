@@ -6,6 +6,10 @@ const ITEMS_ON_PAGE = 10
 const searchProducts = async (req: Request, res: Response) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
+    if (req.method == 'POST') {
+        console.log('post')
+    }
+
     if (!req.query.price_lt && !req.query.cat_uid && !req.query.title && !req.query.vendor_code && !req.query.barcode ) {
         return res.status(400).json('Missing query params, price or cat_uid or title or vendor/bar_code')
     }
@@ -19,22 +23,22 @@ const searchProducts = async (req: Request, res: Response) => {
     let or_obj = []
     let and_obj = []
 
-    //Filters test
-    const test_filter1 = { $or: [
-        {params: {name: 'Марка', value: 'Hobbi'}},
-        {params: {name: 'Марка', value: 'GROSS'}}
-    ] }
-    const test_filter2 = { $or: [
-        {params: {name: 'Длина (м)', value: '5'}},
-        {params: {name: 'Длина (м)', value: '3'}}
-   ] }
-    if (req.query.filters) {
-        and_obj.push(test_filter1)
-        and_obj.push(test_filter2)
+    if (req.method == 'POST') {
+
+        console.log(req.body)
+
+        //Filters test
+        req.body.filters.map((f: any) => {
+            and_obj.push({ $or: f.value.map((v: any) => (
+                    {
+                        params: {name: f.name, value: v }
+                    }
+                ))
+            })
+        })
+
     }
 
-    //const count_gt = req.query.count_gt || 0
-    //and_obj = { ...and_obj, count: { $gt: count_gt} }
 
     const price_gt = req.query.price_gt || -1 
     const price_lt = req.query.price_lt   
