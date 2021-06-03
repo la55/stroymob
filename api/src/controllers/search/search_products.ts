@@ -20,15 +20,13 @@ const searchProducts = async (req: Request, res: Response) => {
     let and_obj = []
 
 
-    console.log(req.method)
-    console.log(req.body)
-
     if (req.method == 'POST') {
 
         if (req.body.filters.length > 0) {
+            console.log(req.body.filters)
 
             req.body.filters.map((f: any) => {
-                and_obj.push({ $or: f.value.map((v: any) => (
+                and_obj.push({ $or: f.values.map((v: any) => (
                         {
                             params: {name: f.name, value: v }
                         }
@@ -78,6 +76,7 @@ const searchProducts = async (req: Request, res: Response) => {
         const products = await Product.find(q_obj)
             .sort({ in_stock: -1, [String(sort_str)]: 1, _id: 1 }).limit(on_page).skip(skip)
         const products_count = await Product.countDocuments(q_obj)
+        console.log(products_count)
         const max_pages = Math.ceil(products_count / on_page)
         return res.json({ count: products_count, page, max_pages, on_page, products })
         //return res.json(q_obj)

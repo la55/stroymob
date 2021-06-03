@@ -1,0 +1,19 @@
+.grid {
+    padding: 0.3em;
+
+    .item {
+        display: flex;
+        ul li {
+            padding: 0.3em;
+            display: inline;
+
+            .default {
+                background-color: #eee;
+            }
+            .selected {
+                background-color: red;
+                color: white;
+            }
+        }
+    }
+}

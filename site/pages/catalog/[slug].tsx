@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import CatList from '../../components/category/CatList'
 import ProductList from '../../components/products/ProductList'
 import CatPath from '../../components/breadcrumbs/cat'
+import Filters from '../../components/products/Filters'
 
 const ON_PAGE = 30 
 
@@ -23,13 +24,18 @@ const Cat = ({ cat, cats, prod_data }) => {
         const searchProducts = async () => {
             const host = process.env.NEXT_PUBLIC_DATA_API
             const url = `${host}/api1/products?page=${pageNum}&on_page=${ON_PAGE}&cat_uid=${cat.uid}`
-            const res = await fetch(url, {
+            let res
+            if (filters.length > 0) {
+                res = await fetch(url, {
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({filters: filters}),
             })
+            } else {
+                res = await fetch(url)
+            }
             const { products, max_pages } = await res.json()
             setResults([...results, ...products])
             setMaxPages(max_pages)
@@ -54,6 +60,11 @@ const Cat = ({ cat, cats, prod_data }) => {
                 { cat.title}
             </h1>
             <CatList cats={cats} />
+            <Filters
+                filters={filters}
+                setFilters={setFilters}
+                setResults={setResults}
+                setPageNum={setPageNum}/>
             <InfiniteScroll
                 dataLength={results.length}
                 next={nextPage}
