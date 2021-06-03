@@ -4,8 +4,9 @@
     .item {
         display: flex;
         ul li {
-            padding: 0.3em;
+            padding: 0.3em 0.5em;
             display: inline;
+            cursor: pointer;
 
             .default {
                 background-color: #eee;

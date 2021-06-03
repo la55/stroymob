@@ -1,34 +1,23 @@
 import { useEffect, useState } from 'react'
 import styles from './Filters.module.scss'
 
-const Filters = ({ filters, setFilters, setPageNum, setResults }) => {
+const Filters = ({ cat_uid, filters, setFilters, setPageNum, setResults }) => {
 
     const [params, setParams] = useState([])
 
     useEffect(() => {
+        const getParams = async () => {
+            const host = process.env.NEXT_PUBLIC_DATA_API
+            const res = await fetch(`${host}/api1/filters/${cat_uid}`)
+            const data = await res.json()
+            console.log(data)
+            setParams(data.params)
+        }
+        getParams()
+    },[])
+
+    useEffect(() => {
         console.log('Filters: ', filters)
-        const params = [
-            {
-                name: "Вид",
-                values: ["Лента мерная","Рулетки"]
-            },
-            {
-                name: "Длина (м)",
-                values: ["2","3","5","7,5","10","50"]
-            },
-            {
-                name: "Марка",
-                values: ["GROSS","Hobbi","MATRIX","SPARTA","Metric","888"]
-            },
-            {
-                name: "Производитель",
-                values: ["Германия","Китай","Россия"]
-            },
-            {
-                name: "Ширина (мм)",
-                values: ["13","16","18","19","24","25"]
-            }
-        ]
         setParams(params)
     }, [filters])
 

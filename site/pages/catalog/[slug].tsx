@@ -19,6 +19,7 @@ const Cat = ({ cat, cats, prod_data }) => {
         if (cats.length > 0) {
             setResults([])
             setPageNum(1)
+            setFilters([])
             return undefined
         }
         const searchProducts = async () => {
@@ -60,11 +61,13 @@ const Cat = ({ cat, cats, prod_data }) => {
                 { cat.title}
             </h1>
             <CatList cats={cats} />
-            <Filters
+            {results.length > 0 && <Filters
+                cat_uid={cat.uid}
                 filters={filters}
                 setFilters={setFilters}
                 setResults={setResults}
                 setPageNum={setPageNum}/>
+            }
             <InfiniteScroll
                 dataLength={results.length}
                 next={nextPage}
@@ -85,18 +88,21 @@ export const getServerSideProps = async ({params}) => {
     const res = await fetch(`${process.env.INNER_DATA_API}/api1/cats/${params.slug}`)
     const { cat, cats } = await res.json()
     let prod_data = { products: [] }
+    let params_by_cat = []
     if (cats.length === 0) {
 
 
         const prod_res = await fetch(`${process.env.INNER_DATA_API}/api1/products/?on_page=${ON_PAGE}&cat_uid=${params.slug}`)
         prod_data = await prod_res.json()
+        const filter_res = await fetch(`${process.env.INNER_DATA_API}/api1/filters/${params.slug}`)
+        params_by_cat = await filter_res.json()
     }
 
     return {
         props: {
             cat,
             cats,
-            prod_data: prod_data
+            prod_data: prod_data,
         }
     }
 }

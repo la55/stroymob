@@ -35,10 +35,10 @@ const main = async () => {
     const xml = fs.readFileSync(MEDIA_DIR + XML_FILE)
     //const xml = fs.readFileSync('./media/export_with_params.xml')
 
-    const { cats, products } = await parseCatalog(xml)
+    const { cats, products, filters } = await parseCatalog(xml)
     console.log(`Catalog parsed`)
 
-    await createCatalog({cats, products})
+    await createCatalog({cats, products, filters})
     console.log(`Catalog created`)
 
     db.close()

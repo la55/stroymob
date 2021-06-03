@@ -8,8 +8,8 @@ const parseCatalog = async (xml) =>  {
     })
     const data = await parser.parseStringPromise(xml)
     const { cats, cat_uids } = getCats(data.yml_catalog.categories)
-    const products = getProducts(data.yml_catalog.offers, cat_uids)
-    return { cats, products }
+    const {products, filters} = getProducts(data.yml_catalog.offers, cat_uids)
+    return { cats, products, filters }
 } 
 
 export default parseCatalog
