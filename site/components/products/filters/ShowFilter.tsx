@@ -4,7 +4,9 @@ const ShowFilter = ({ filters, resCount, setShowFilters }) => {
     return (
         <div className={styles.panel}>
             <div className={styles.filter} onClick={() => setShowFilters(true)}>
-                ФИЛЬТР ({filters.length})
+                <span>
+                    ФИЛЬТР ({filters.length})
+                </span>
             </div>
             <div className={styles.count}>
                 ВСЕГО: { resCount }

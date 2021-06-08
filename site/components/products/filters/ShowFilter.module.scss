@@ -1,21 +1,26 @@
 .panel {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    border:  1px solid green;
-    background-color: #333;
+    justify-content: flex-start;
+    background-color: #777;
     color: white;
 
-    .filter, .count {
-        text-align: center;
-    }
     .filter {
         flex: 2;
-        background-color: green;
+        background-color: #222;
         font-weight: 900;
-        cursor: pointer;
+        border-radius: 0  50% 50% 0;
+
+        span {
+            cursor: pointer;
+            padding: 0 2em 0 0;
+            border: 2px solid white;
+            background-color: green;
+            border-radius: 0  50% 50% 0;
+        }
     }
     .count {
+        text-align: center;
         flex: 1;
     }
 }
