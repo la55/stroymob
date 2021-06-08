@@ -6,18 +6,20 @@ const Filters = ({ catParams, showFilters, setShowFilters,
 
     const [params, setParams] = useState(catParams)
     const [filters, setFilters] = useState(realFilters)
+    const [filtersChanged, setFiltersChanged] = useState(false)
 
 
     useEffect(() => {
-        setParams(catParams)
-    }, [filters])
+        setParams(catParams) }, [filters])
 
     const resetResults = () => {
-        if (filters.length > 0) {
+        console.log(filtersChanged)
+        if (filtersChanged) {
             setResults([])
             setPageNum(1)
+            setRealFilters(filters)
         }
-        setRealFilters(filters)
+        setFiltersChanged(false)
         setShowFilters(false)
     }
 
@@ -26,6 +28,7 @@ const Filters = ({ catParams, showFilters, setShowFilters,
     }
     
     const dropFilter = () => {
+        setFiltersChanged(true)
         setFilters([])
     }
 
@@ -38,6 +41,7 @@ const Filters = ({ catParams, showFilters, setShowFilters,
     }
 
     const addValue = (name, value) => {
+        setFiltersChanged(true)
         const filter = filters.find(f => f.name === name)
         if (filter) {
             const restElements = filters.filter(f => f.name !== name)
@@ -71,36 +75,38 @@ const Filters = ({ catParams, showFilters, setShowFilters,
 
     return (
         <div className={showFilters ? styles.show : styles.hide}>
-            <div className={styles.control}>
-                <div onClick={() => applyFilter()} className={styles.apply}>
-                    Применить {filters.length > 0 ? filters.length : ''}
-                </div>
-                <div onClick={() => dropFilter()} className={styles.drop}>
-                    Сбросить
-                </div>
-            </div>
-            <div className={styles.grid}>
-                {params.map(f=> (
-                    <div key={f.name} className={styles.item}>
-                        <div className={styles.name}>
-                            {f.name} 
-                            <span className={styles.count}>
-                                {countSelected(f.name) > 0 ? countSelected(f.name) : ''}
-                            </span>
-                        </div>
-                        <ul className={styles.values}>
-                            {f.values.map(value => (
-                                    <li key={value} className={styles.value}>
-                                        <span
-                                        className={isSelected(f.name, value) ? styles.selected : styles.default}
-                                            onClick={(e) => addValue(f.name, value)}>
-                                            {value}
-                                        </span>
-                                    </li>
-                            ))}
-                        </ul>
+            <div className={styles.container}>
+                <div className={styles.control}>
+                    <div onClick={() => applyFilter()} className={styles.apply}>
+                        Применить {filters.length > 0 ? filters.length : ''}
                     </div>
-                ))}
+                    <div onClick={() => dropFilter()} className={styles.drop}>
+                        Сбросить
+                    </div>
+                </div>
+                <div className={styles.grid}>
+                    {params.map(f=> (
+                        <div key={f.name} className={styles.item}>
+                            <div className={styles.name}>
+                                {f.name} 
+                                <span className={styles.count}>
+                                    {countSelected(f.name) > 0 ? countSelected(f.name) : ''}
+                                </span>
+                            </div>
+                            <ul className={styles.values}>
+                                {f.values.map(value => (
+                                        <li key={value} className={styles.value}>
+                                            <span
+                                            className={isSelected(f.name, value) ? styles.selected : styles.default}
+                                                onClick={(e) => addValue(f.name, value)}>
+                                                {value}
+                                            </span>
+                                        </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )

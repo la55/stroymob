@@ -1,0 +1,21 @@
+.panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border:  1px solid green;
+    background-color: #333;
+    color: white;
+
+    .filter, .count {
+        text-align: center;
+    }
+    .filter {
+        flex: 2;
+        background-color: green;
+        font-weight: 900;
+        cursor: pointer;
+    }
+    .count {
+        flex: 1;
+    }
+}

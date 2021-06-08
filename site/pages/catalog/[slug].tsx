@@ -4,7 +4,8 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import CatList from '../../components/category/CatList'
 import ProductList from '../../components/products/ProductList'
 import CatPath from '../../components/breadcrumbs/cat'
-import Filters from '../../components/products/Filters'
+import Filters from '../../components/products/filters/Filters'
+import ShowFilter from '../../components/products/filters/ShowFilter'
 
 const ON_PAGE = 30 
 
@@ -68,14 +69,11 @@ const Cat = ({ cat, cats, cat_params, prod_data }) => {
             <CatList cats={cats} />
             {cats.length === 0 && 
                 <div>
-                    <div>
-                        <div onClick={() => setShowFilters(true)}>
-                            ФИЛЬТР ({filters.length})
-                        </div>
-                        <div>
-                            ВСЕГО: { resCount }
-                        </div>
-                    </div>
+                    <ShowFilter
+                     filters={filters}
+                     resCount={resCount}
+                     setShowFilters={setShowFilters}
+                    />
                     <Filters
                     catParams={cat_params.params}
                     realFilters={filters}
