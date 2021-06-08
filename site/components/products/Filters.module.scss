@@ -59,6 +59,16 @@
                 display: block;
                 width: 100%;
                 border-bottom: 1px solid white;
+                position: relative;
+
+                .count {
+                    font-weight: 700;
+                    color: green;
+                    font-size: 1.1em;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
             }
 
             ul li {

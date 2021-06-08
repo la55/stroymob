@@ -13,8 +13,10 @@ const Filters = ({ catParams, showFilters, setShowFilters,
     }, [filters])
 
     const resetResults = () => {
-        setPageNum(1)
-        setResults([])
+        if (filters.length > 0) {
+            setResults([])
+            setPageNum(1)
+        }
         setRealFilters(filters)
         setShowFilters(false)
     }
@@ -25,6 +27,14 @@ const Filters = ({ catParams, showFilters, setShowFilters,
     
     const dropFilter = () => {
         setFilters([])
+    }
+
+    const countSelected = (name) => {
+        const filter = filters.find(f => f.name === name)
+        if (filter) {
+            return filter.values.length
+        }
+        return 0
     }
 
     const addValue = (name, value) => {
@@ -63,7 +73,7 @@ const Filters = ({ catParams, showFilters, setShowFilters,
         <div className={showFilters ? styles.show : styles.hide}>
             <div className={styles.control}>
                 <div onClick={() => applyFilter()} className={styles.apply}>
-                    Применить
+                    Применить {filters.length > 0 ? filters.length : ''}
                 </div>
                 <div onClick={() => dropFilter()} className={styles.drop}>
                     Сбросить
@@ -73,7 +83,10 @@ const Filters = ({ catParams, showFilters, setShowFilters,
                 {params.map(f=> (
                     <div key={f.name} className={styles.item}>
                         <div className={styles.name}>
-                            {f.name}:
+                            {f.name} 
+                            <span className={styles.count}>
+                                {countSelected(f.name) > 0 ? countSelected(f.name) : ''}
+                            </span>
                         </div>
                         <ul className={styles.values}>
                             {f.values.map(value => (
