@@ -8,11 +8,13 @@ import Filters from '../../components/products/Filters'
 
 const ON_PAGE = 30 
 
-const Cat = ({ cat, cats, prod_data }) => {
+const Cat = ({ cat, cats, cat_params, prod_data }) => {
     const [results, setResults] = useState([])
+    const [resCount, setResCount] = useState(prod_data.count)
     const [pageNum, setPageNum] = useState(1)
     const [maxPages, setMaxPages] = useState(1)
     const [filters, setFilters] = useState([])
+    const [showFilters, setShowFilters] = useState(false)
 
 
     useEffect(() => {
@@ -20,8 +22,10 @@ const Cat = ({ cat, cats, prod_data }) => {
             setResults([])
             setPageNum(1)
             setFilters([])
-            return undefined
         }
+    },[cats])
+
+    useEffect(() => {
         const searchProducts = async () => {
             const host = process.env.NEXT_PUBLIC_DATA_API
             const url = `${host}/api1/products?page=${pageNum}&on_page=${ON_PAGE}&cat_uid=${cat.uid}`
@@ -37,8 +41,9 @@ const Cat = ({ cat, cats, prod_data }) => {
             } else {
                 res = await fetch(url)
             }
-            const { products, max_pages } = await res.json()
+            const { products, max_pages, count } = await res.json()
             setResults([...results, ...products])
+            setResCount(count)
             setMaxPages(max_pages)
         }
         searchProducts()
@@ -61,18 +66,31 @@ const Cat = ({ cat, cats, prod_data }) => {
                 { cat.title}
             </h1>
             <CatList cats={cats} />
-            {results.length > 0 && <Filters
-                cat_uid={cat.uid}
-                filters={filters}
-                setFilters={setFilters}
-                setResults={setResults}
-                setPageNum={setPageNum}/>
+            {cats.length === 0 && 
+                <div>
+                    <div>
+                        <div onClick={() => setShowFilters(true)}>
+                            ФИЛЬТР ({filters.length})
+                        </div>
+                        <div>
+                            ВСЕГО: { resCount }
+                        </div>
+                    </div>
+                    <Filters
+                    catParams={cat_params.params}
+                    realFilters={filters}
+                    showFilters={showFilters}
+                    setShowFilters={setShowFilters}
+                    setRealFilters={setFilters}
+                    setResults={setResults}
+                    setPageNum={setPageNum}/>
+                </div>
             }
             <InfiniteScroll
                 dataLength={results.length}
                 next={nextPage}
                 hasMore={(maxPages > pageNum)}
-                loader={<div onClick={nextPage}>ПОКАЗАТЬ ЕЩЕ ...</div>}
+                loader={<div onClick={nextPage}>{results.length > 0 && <b>ПОКАЗАТЬ ЕЩЕ ...</b>}</div>}
             >
                 <ProductList products={results} />
             </InfiniteScroll>
@@ -88,21 +106,22 @@ export const getServerSideProps = async ({params}) => {
     const res = await fetch(`${process.env.INNER_DATA_API}/api1/cats/${params.slug}`)
     const { cat, cats } = await res.json()
     let prod_data = { products: [] }
-    let params_by_cat = []
+    let cat_params = []
     if (cats.length === 0) {
 
 
         const prod_res = await fetch(`${process.env.INNER_DATA_API}/api1/products/?on_page=${ON_PAGE}&cat_uid=${params.slug}`)
         prod_data = await prod_res.json()
         const filter_res = await fetch(`${process.env.INNER_DATA_API}/api1/filters/${params.slug}`)
-        params_by_cat = await filter_res.json()
+        cat_params = await filter_res.json()
     }
 
     return {
         props: {
             cat,
             cats,
-            prod_data: prod_data,
+            prod_data,
+            cat_params
         }
     }
 }

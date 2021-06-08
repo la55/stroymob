@@ -18,7 +18,14 @@ export const CartContext = createContext({
 
 const CartProvider = ({ children }) => {
 
-    const [cartItems, setCartItems] = useState([])
+
+    let storedItems
+    if (typeof window !== 'undefined') {
+        storedItems = JSON.parse(localStorage.getItem('cart')) || []
+    } else {
+        storedItems =  []
+    }
+    const [cartItems, setCartItems] = useState(storedItems)
     const [cartItemsCount, setCartItemsCount] = useState(0)
     const [cartTotalPrice, setCartTotalPrice] = useState(0.00)
 
@@ -27,12 +34,6 @@ const CartProvider = ({ children }) => {
     const removeItem = itemId => setCartItems(removeItemFromCart(cartItems, itemId))
     const clearItems = itemId => setCartItems(clearItemsFromCart(cartItems, itemId))
 
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setCartItems(JSON.parse(localStorage.getItem('cart')) || [])
-            setCartItemsCount(cartItems.length)
-        }
-    }, [])
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cartItems))

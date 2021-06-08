@@ -1,30 +1,33 @@
 import { useEffect, useState } from 'react'
 import styles from './Filters.module.scss'
 
-const Filters = ({ cat_uid, filters, setFilters, setPageNum, setResults }) => {
+const Filters = ({ catParams, showFilters, setShowFilters,
+     realFilters, setRealFilters, setPageNum, setResults }) => {
 
-    const [params, setParams] = useState([])
+    const [params, setParams] = useState(catParams)
+    const [filters, setFilters] = useState(realFilters)
 
-    useEffect(() => {
-        const getParams = async () => {
-            const host = process.env.NEXT_PUBLIC_DATA_API
-            const res = await fetch(`${host}/api1/filters/${cat_uid}`)
-            const data = await res.json()
-            console.log(data)
-            setParams(data.params)
-        }
-        getParams()
-    },[])
 
     useEffect(() => {
-        console.log('Filters: ', filters)
-        setParams(params)
+        setParams(catParams)
     }, [filters])
 
-    const addValue = (name, value) => {
-        console.log(name, value)
-        setResults([])
+    const resetResults = () => {
         setPageNum(1)
+        setResults([])
+        setRealFilters(filters)
+        setShowFilters(false)
+    }
+
+    const applyFilter = () => {
+        resetResults()
+    }
+    
+    const dropFilter = () => {
+        setFilters([])
+    }
+
+    const addValue = (name, value) => {
         const filter = filters.find(f => f.name === name)
         if (filter) {
             const restElements = filters.filter(f => f.name !== name)
@@ -57,25 +60,35 @@ const Filters = ({ cat_uid, filters, setFilters, setPageNum, setResults }) => {
 
 
     return (
-        <div className={styles.grid}>
-            {params.map(f=> (
-                <div key={f.name} className={styles.item}>
-                    <div className={styles.name}>
-                        {f.name}:
-                    </div>
-                    <ul className={styles.values}>
-                        {f.values.map(value => (
-                                <li key={value} className={styles.value}>
-                                    <span
-                                     className={isSelected(f.name, value) ? styles.selected : styles.default}
-                                        onClick={(e) => addValue(f.name, value)}>
-                                        {value}
-                                    </span>
-                                </li>
-                        ))}
-                    </ul>
+        <div className={showFilters ? styles.show : styles.hide}>
+            <div className={styles.control}>
+                <div onClick={() => applyFilter()} className={styles.apply}>
+                    Применить
                 </div>
-            ))}
+                <div onClick={() => dropFilter()} className={styles.drop}>
+                    Сбросить
+                </div>
+            </div>
+            <div className={styles.grid}>
+                {params.map(f=> (
+                    <div key={f.name} className={styles.item}>
+                        <div className={styles.name}>
+                            {f.name}:
+                        </div>
+                        <ul className={styles.values}>
+                            {f.values.map(value => (
+                                    <li key={value} className={styles.value}>
+                                        <span
+                                        className={isSelected(f.name, value) ? styles.selected : styles.default}
+                                            onClick={(e) => addValue(f.name, value)}>
+                                            {value}
+                                        </span>
+                                    </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
