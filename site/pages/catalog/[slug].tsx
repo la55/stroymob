@@ -69,11 +69,13 @@ const Cat = ({ cat, cats, cat_params, prod_data }) => {
             <CatList cats={cats} />
             {cats.length === 0 && 
                 <div>
-                    <ShowFilter
-                     filters={filters}
-                     resCount={resCount}
-                     setShowFilters={setShowFilters}
-                    />
+                    {cat_params.params.length > 0 &&
+                        <ShowFilter
+                        filters={filters}
+                        resCount={resCount}
+                        setShowFilters={setShowFilters}
+                        />
+                    }
                     <Filters
                     catParams={cat_params.params}
                     realFilters={filters}
